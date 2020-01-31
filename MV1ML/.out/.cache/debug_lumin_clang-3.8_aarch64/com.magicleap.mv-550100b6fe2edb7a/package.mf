@@ -1,0 +1,297 @@
+{
+ "entries": [
+  {
+   "compression": 8,
+   "hash": "b8ebf5aa3c5969194e61c9f20ca53bc40b408f28",
+   "pkgpath": "Data/Managed/Metadata/global-metadata.dat",
+   "size": 3505564,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Managed/Metadata/global-metadata.dat"
+  },
+  {
+   "compression": 8,
+   "hash": "f053f550fa5b1436c8d7bcb7e3b25551ffa05d3e",
+   "pkgpath": "bin/libil2cpp.so",
+   "size": 57242344,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Native/libil2cpp.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "50bab43464a7ea8bd3a5e46d5c885a089b3b2565",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/libil2cpp.so-1132f22d56d85343",
+   "xfrm_size": 57243102
+  },
+  {
+   "compression": 8,
+   "hash": "eb463901d6f69c739181911a175309562ca388ce",
+   "pkgpath": "bin/AudioPluginMSASpatializer.so",
+   "size": 286544,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/AudioPluginMSASpatializer.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "30d9576cc86edf0c17b6db0ceebe124c83e03a47",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/AudioPluginMSASpatializer.so-c950d569f6a30fd4",
+   "xfrm_size": 287302
+  },
+  {
+   "compression": 8,
+   "hash": "7710f92a8fbf2219eb9567197fec7e991778c70d",
+   "pkgpath": "bin/LuminMediaPlayer.dll",
+   "size": 68608,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/LuminMediaPlayer.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "e5f28f2367fb041ad28fe868e67ab428420d5900",
+   "pkgpath": "bin/LuminUnity.dll",
+   "size": 328192,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/LuminUnity.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "51f119b9d8bb1803df4f0e0ead2656f6fbba374b",
+   "pkgpath": "bin/MSA.Runtime.dll",
+   "size": 22528,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/MSA.Runtime.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "a71acc50817a0929bccc93cbe7619d57d25d1b17",
+   "pkgpath": "bin/UnityMagicLeap.so",
+   "size": 3077192,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/UnityMagicLeap.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "377eb8a4e15b33d161872cb3c2089943248cbed5",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/UnityMagicLeap.so-c950d569f6a30fd4",
+   "xfrm_size": 3077950
+  },
+  {
+   "compression": 8,
+   "hash": "a86c27fcbaa2b90e59a995a472f69b8736524c2e",
+   "pkgpath": "bin/libml_camera_plugin.so",
+   "size": 14184,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/libml_camera_plugin.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "563f29bdcde31e2ab055f1efa58c62035f479fed",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/libml_camera_plugin.so-c950d569f6a30fd4",
+   "xfrm_size": 14942
+  },
+  {
+   "compression": 8,
+   "hash": "1d1daf0c329d1182bee0bcc2986e0368b2227511",
+   "pkgpath": "bin/libml_mediaplayer_plugin.so",
+   "size": 72064,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/libml_mediaplayer_plugin.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "8a8994ff0643c2849666df9e70879d0111e3dbd3",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/libml_mediaplayer_plugin.so-c950d569f6a30fd4",
+   "xfrm_size": 72822
+  },
+  {
+   "compression": 8,
+   "hash": "984e4d2049ed5491b970ba15d1e8c8cadac0896e",
+   "pkgpath": "bin/nunit.framework.dll",
+   "size": 339968,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Plugins/nunit.framework.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "e6124da6073b916e29e013cf3ae3f58a4c5fdb0e",
+   "pkgpath": "Data/Resources/mscorlib.dll-resources.dat",
+   "size": 337563,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Resources/mscorlib.dll-resources.dat"
+  },
+  {
+   "compression": 8,
+   "hash": "fa10859a933989c5961257c02d9f4fcf042044f1",
+   "pkgpath": "Data/Resources/unity default resources",
+   "size": 3689324,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Resources/unity default resources"
+  },
+  {
+   "compression": 8,
+   "hash": "0be611e746b25f7f4f2db4cc69fbb2e3b37bece6",
+   "pkgpath": "Data/Resources/unity_builtin_extra",
+   "size": 942768,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/Resources/unity_builtin_extra"
+  },
+  {
+   "compression": 8,
+   "hash": "778891100a8030ad6096db64784c6e5d67c28378",
+   "pkgpath": "Data/UnitySubsystems/UnityMagicLeap/UnitySubsystemsManifest.json",
+   "size": 417,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/UnitySubsystems/UnityMagicLeap/UnitySubsystemsManifest.json"
+  },
+  {
+   "compression": 8,
+   "hash": "f226dfc0f1097b18c77eb2198b6257be5b02a613",
+   "pkgpath": "Data/boot.config",
+   "size": 123,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/boot.config"
+  },
+  {
+   "compression": 8,
+   "hash": "6d120cd347e21290e0a4f1f615a4909b5f00afda",
+   "pkgpath": "Data/globalgamemanagers",
+   "size": 70376,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/globalgamemanagers"
+  },
+  {
+   "compression": 8,
+   "hash": "1ba0baf5452e771c83669f7288f5919ddc9e6c88",
+   "pkgpath": "Data/globalgamemanagers.assets",
+   "size": 110108,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/globalgamemanagers.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "390e149390e58781309b3db3f1982c95ca5cd4c3",
+   "pkgpath": "Data/level0",
+   "size": 9220,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/level0"
+  },
+  {
+   "compression": 8,
+   "hash": "901bb67a26f1f2ec39d490ccb07fe2eb7cbbab29",
+   "pkgpath": "Data/level0.resS",
+   "size": 131232,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/level0.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "606629abea216a0ec8675915518e5ec36bbd8717",
+   "pkgpath": "Data/resources.assets",
+   "size": 565640,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/resources.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "1d5e5447a0f0b085b695376c9fdb7738e07e4f23",
+   "pkgpath": "Data/resources.assets.resS",
+   "size": 360480,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/resources.assets.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "72df8187e8b57e64fb93926431a0053987da4917",
+   "pkgpath": "Data/resources.resource",
+   "size": 5875136,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/resources.resource"
+  },
+  {
+   "compression": 8,
+   "hash": "d9102ab655bb94401e62dd29039cd6e73488e63d",
+   "pkgpath": "Data/sharedassets0.assets",
+   "size": 298504,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Data/sharedassets0.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "cd44fdd4867a1d94b13b1b6db48d09b5980803fe",
+   "pkgpath": "bin/Player.elf",
+   "size": 20747736,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/Player.elf",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "a8911ecf38e8b150df6e6a12d6a08cab1ee85442",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/Player.elf-e6182c3a7d68dcd3",
+   "xfrm_size": 20748494
+  },
+  {
+   "compression": 8,
+   "hash": "a0942b33f585eda54be2936afdc263d55ef4c906",
+   "pkgpath": "manifest.xml",
+   "size": 843,
+   "src": "/Users/filiescu/Desktop/MV1ML/Temp/StagingArea/manifest.xml",
+   "xfrm_flags": {
+    "manifest": {
+     "cert_hash": "92a8db21c387458e46200c2bc228af932bdf2cac",
+     "developer_id": "34d7ccd3-5300-4c5d-b823-d64700f8559a"
+    }
+   },
+   "xfrm_hash": "dfca0dfdd407e1df6344662af9c232ab76c5288c",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/manifest.xml-e6182c3a7d68dcd3",
+   "xfrm_size": 856
+  },
+  {
+   "compression": 8,
+   "hash": "5925de9f4d7b83c65d1fd7b25ced5f0bf8c27e73",
+   "pkgpath": "bin/libc++_shared.so",
+   "size": 976832,
+   "src": "/Users/filiescu/MagicLeap/mlsdk/v0.23.0/lumin/stl/libc++/lib/libc++_shared.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+    },
+    "taildata": {
+     "debuggable": true,
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "28d7bc88f0e47821417b885ab14d4e3bcfaec59e",
+   "xfrm_path": "/Users/filiescu/Desktop/MV1ML/.out/.cache/debug_lumin_clang-3.8_aarch64/com.magicleap.mv-550100b6fe2edb7a/libc++_shared.so-d05eafb66edcb982",
+   "xfrm_size": 977590
+  }
+ ],
+ "pkgflags": {
+  "signed": {
+   "cert": "/Users/filiescu/keys/filipiliescudev.cert"
+  },
+  "taildata": {
+   "debuggable": true,
+   "devcert": "/Users/filiescu/keys/filipiliescudev.cert",
+   "sbox": "USER",
+   "version": 3
+  }
+ }
+}
