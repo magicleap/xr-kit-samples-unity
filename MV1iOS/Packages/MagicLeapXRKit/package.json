@@ -1,0 +1,12 @@
+{
+  "name": "com.magicleap.xrkit",
+  "version": "0.2.0",
+  "displayName": "Magic Leap XR Kit",
+  "description": "Provides Magicverse integration for Unity.",
+  "unity": "2019.2",
+  "unityRelease": "4f1",
+  "dependencies": {
+    "com.unity.xr.arfoundation": "2.1.0-preview.2",
+    "com.unity.xr.arkit": "2.1.0-preview.3"
+  }
+}

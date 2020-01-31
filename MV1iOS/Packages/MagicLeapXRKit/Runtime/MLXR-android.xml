@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MLXR-android</name>
+    </assembly>
+    <members>
+        <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.Awake">
+            Public functions.
+        </member>
+        <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.SetFixedCameraFocus(UnityEngine.XR.ARFoundation.ARCameraManager)">
+            Private functions.
+        </member>
+    </members>
+</doc>
