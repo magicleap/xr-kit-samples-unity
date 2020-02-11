@@ -74,36 +74,40 @@ public class PCFPlacement : MonoBehaviour
     {
         if (_placementPrefabs != null && _placementPrefabs.Length > _placementIndex)
         {
-            //Transmission.Spawn() instead
-            var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(position,
-            (MLResult result, MLPCF pcf) =>
-            {
-                // bind the object to the PCF
-                var transformHelper = new GameObject("(TransformHelper)").transform;
-                //transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
-                transformHelper.SetPositionAndRotation(pcf.Position, pcf.Orientation);
-                
-                Vector3 positionOffset = transformHelper.InverseTransformPoint(position);
-                Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * rotation;
-
-                // spawn everywhere and on the network using the local position and rotation (pcf offset) 
-                var resourceObject = _placementPrefabs[_placementIndex].name;
-                TransmissionObject content = Transmission.Spawn(resourceObject, Vector3.zero, Quaternion.identity, Vector3.one);
-                content.transform.SetParent(transformHelper);
-                content.targetPosition = positionOffset;
-                content.targetRotation = rotationOffset;
-                content.gameObject.SetActive(true);
-                Debug.LogFormat("Spawned {0}, pcf: {1}, parent: {2}", content, pcf, transformHelper);
-            });
-
-            // GameObject content = Instantiate(_placementPrefabs[_placementIndex]);
-
-            //     content.transform.position = position;
-            //     content.transform.rotation = rotation;
-            //     content.gameObject.SetActive(true);
-
-
+            var resourceObject = _placementPrefabs[_placementIndex].name;
+            TransmissionObject content = Transmission.Spawn(resourceObject, position, rotation, Vector3.one);
             _placement.Resume();
+
+            //Transmission.Spawn() instead
+            // var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(position,
+            // (MLResult result, MLPCF pcf) =>
+            // {
+            //     // bind the object to the PCF
+            //     // var transformHelper = new GameObject("(TransformHelper)").transform;
+            //     // //transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            //     // transformHelper.SetPositionAndRotation(pcf.Position, pcf.Orientation);
+                
+            //     // Vector3 positionOffset = transformHelper.InverseTransformPoint(position);
+            //     // Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * rotation;
+
+            //     // spawn everywhere and on the network using the local position and rotation (pcf offset) 
+            //     var resourceObject = _placementPrefabs[_placementIndex].name;
+            //     TransmissionObject content = Transmission.Spawn(resourceObject, position, rotation, Vector3.one);
+            //     //content.transform.SetParent(transformHelper);
+            //     // content.targetPosition = positionOffset;
+            //     // content.targetRotation = rotationOffset;
+            //     // content.gameObject.SetActive(true);
+            //     //Debug.LogFormat("Spawned {0}, pcf: {1}, parent: {2}", content, pcf, transformHelper);
+
+            //     // GameObject content = Instantiate(_placementPrefabs[_placementIndex]);
+            //     // content.transform.position = position;
+            //     // content.transform.rotation = rotation;
+            //     // content.gameObject.SetActive(true);
+
+            //     _placement.Resume();
+
+            // });
+
         }
     }
 
