@@ -102,7 +102,7 @@ public class RuntimeManager : MonoBehaviour
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * Quaternion.LookRotation(Vector3.forward);
 
         // spawn everywhere and on the network using the local position and rotation (pcf offset) 
-        TransmissionObject characterTransmissionObject = Transmission.Spawn("MV__Placement_PictureFrame", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject characterTransmissionObject = Transmission.Spawn("Dummy", objPosition, Quaternion.identity, Vector3.one);
         characterTransmissionObject.transform.SetParent(transformHelper);
         characterTransmissionObject.targetPosition = positionOffset;
         characterTransmissionObject.targetRotation = rotationOffset;

@@ -625,6 +625,9 @@ namespace MagicLeapTools
 
         private static TransmissionObject PerformSpawn(string resourceFileName, bool mine, string creator, string guid, Vector3 position, Quaternion rotation, Vector3 scale)
         {
+            
+            Debug.Log($"Begin Spawn {resourceFileName} with coords {position} from {creator}");
+                    
             //already exists;
             if (TransmissionObject.Exists(guid))
             {
@@ -676,6 +679,9 @@ namespace MagicLeapTools
             spawned.transform.localPosition = position;
             spawned.transform.localRotation = rotation;
             spawned.transform.localScale = scale;
+
+            Debug.Log($"End Spawn {resourceFileName} with local coords {spawned.transform.localPosition} world coords {spawned.transform.position} parent {spawned.transform.parent.position} from {creator}");
+
             return spawned;
         }
 

@@ -225,12 +225,12 @@ PrefabInstance:
     - target: {fileID: 114301182059694268, guid: b6af97b52b3429641aa904690975fa80,
         type: 3}
       propertyPath: m_LevelOfDetail
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114301182059694268, guid: b6af97b52b3429641aa904690975fa80,
         type: 3}
       propertyPath: m_Planarize
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6af97b52b3429641aa904690975fa80, type: 3}
@@ -637,6 +637,8 @@ MonoBehaviour:
   - {fileID: 1594690611408922, guid: b0abe2bfc39654bb0a98dd8f1114b8b4, type: 3}
   - {fileID: 1594690611408922, guid: e9deb04793268485d8175ea5d8bcf5ea, type: 3}
   - {fileID: 1594690611408922, guid: 015f3706fb92d4bc3b6eba83436d30f5, type: 3}
+  - {fileID: 4428412056205860715, guid: a174457c2653d4d72a5eaad63ffdda5a, type: 3}
+  - {fileID: 5327960270370931286, guid: 5467a493008b949b3aea29807fc6d3fd, type: 3}
 --- !u!114 &1124344068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1286,16 @@ PrefabInstance:
         type: 3}
       propertyPath: appKey
       value: 236623
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006321171478279076, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
+        type: 3}
+      propertyPath: debugOutgoing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006321171478279076, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
+        type: 3}
+      propertyPath: debugIncoming
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7599050699442747582, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}

@@ -78,7 +78,7 @@ public class PCFPlacement : MonoBehaviour
             TransmissionObject content = Transmission.Spawn(resourceObject, position, rotation, Vector3.one);
             _placement.Resume();
 
-            //Transmission.Spawn() instead
+            // Transmission.Spawn() instead
             // var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(position,
             // (MLResult result, MLPCF pcf) =>
             // {
