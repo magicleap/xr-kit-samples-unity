@@ -6,31 +6,19 @@ using MagicLeapTools;
 using System.Linq;
 #if PLATFORM_IOS
 using MagicLeap.XR.XRKit;
-#elif PLATFORM_LUMIN
-using UnityEngine.XR.MagicLeap;
 #endif
 
 public class RuntimeManager : MonoBehaviour
 {
-#if PLATFORM_LUMIN
-    public ControlInput controlInput;
-#endif
-
     public Text info;
     private string _initialInfo;
-    List<GameObject> spawnedAndUnattachedGameObjects;
-    List<GameObject> attachedGameObjects;
 
+    List<GameObject> spawnedAndUnattachedGameObjects = new List<GameObject>();
+    List<GameObject> attachedGameObjects = new List<GameObject>();
+    
     void Awake()
     {
          _initialInfo = info.text;
-        spawnedAndUnattachedGameObjects = new List<GameObject>();
-        attachedGameObjects = new List<GameObject>();
-
-        #if PLATFORM_LUMIN
-            //trigger events:
-            controlInput.OnTriggerDown.AddListener(HandleTriggerDown);
-        #endif
     }
 
     // Update is called once per frame
@@ -46,25 +34,7 @@ public class RuntimeManager : MonoBehaviour
         info.text = output;
     }
 
-    private void SendRPC()
-    {
-        //RPCs use SendMessage under the hood and are sent to the Transmission GameObject and any GameObject in its RPC Targets
-        RPCMessage rpcMessage = new RPCMessage("ChangeColor");
-        Transmission.Send(rpcMessage);
-    }
-
-    //Public Methods(RPCs):
-    public void ChangeColor()
-    {
-        Color randomColor = new Color(Random.value, Random.value, Random.value);
-        foreach(var go in attachedGameObjects)
-        {
-            go.GetComponent<Material>().color = randomColor;
-        }
-    }
-
 #if PLATFORM_IOS
-
     void UpdateTouches()
     {
         if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
@@ -99,12 +69,6 @@ public class RuntimeManager : MonoBehaviour
             }
         }
     }
-
-#elif PLATFORM_LUMIN
-    private void HandleTriggerDown()
-    {
-        SendRPC();
-    }
 #endif
 
     void AttachToPCF(GameObject transmissionObject, Vector3 pcfPosition, Quaternion pcfRotation){
@@ -136,7 +100,7 @@ public class RuntimeManager : MonoBehaviour
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * Quaternion.LookRotation(Vector3.forward);
 
         // spawn everywhere and on the network using the local position and rotation (pcf offset) 
-        TransmissionObject characterTransmissionObject = Transmission.Spawn("Dummy", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject characterTransmissionObject = Transmission.Spawn("MV__Placement_PictureFrame", Vector3.zero, Quaternion.identity, Vector3.one);
         characterTransmissionObject.transform.SetParent(transformHelper);
         characterTransmissionObject.targetPosition = positionOffset;
         characterTransmissionObject.targetRotation = rotationOffset;
