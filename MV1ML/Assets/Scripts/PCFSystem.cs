@@ -82,6 +82,7 @@ public class PCFSystem : MonoBehaviour
                         if (result.IsOk)
                         {
                             pose = returnPose(posedPCF.Position, posedPCF.Orientation);
+                            Debug.Log($"PoseForPCFID callback PCF: {mlPCF} Returning Pose: {pose}");
                         }
                     });
                 }
