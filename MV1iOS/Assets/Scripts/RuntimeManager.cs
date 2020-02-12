@@ -84,7 +84,7 @@ public class RuntimeManager : MonoBehaviour
         Vector3 positionOffset = transformHelper.InverseTransformPoint(transmissionObject.transform.position);
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * transmissionObject.transform.rotation;
 
-        transmissionObject.transform.SetParent(transformHelper);
+        //transmissionObject.transform.SetParent(transformHelper);
         transmissionObject.GetComponent<TransmissionObject>().targetPosition = positionOffset;
         transmissionObject.GetComponent<TransmissionObject>().targetRotation = rotationOffset;
         
@@ -102,10 +102,7 @@ public class RuntimeManager : MonoBehaviour
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * Quaternion.LookRotation(Vector3.forward);
 
         // spawn everywhere and on the network using the local position and rotation (pcf offset) 
-        TransmissionObject characterTransmissionObject = Transmission.Spawn("Dummy", objPosition, Quaternion.identity, Vector3.one);
-        characterTransmissionObject.transform.SetParent(transformHelper);
-        characterTransmissionObject.targetPosition = positionOffset;
-        characterTransmissionObject.targetRotation = rotationOffset;
+        TransmissionObject characterTransmissionObject = Transmission.Spawn("Dummy", positionOffset, rotationOffset, Vector3.one);
         
         attachedGameObjects.Add(characterTransmissionObject.gameObject);
     }

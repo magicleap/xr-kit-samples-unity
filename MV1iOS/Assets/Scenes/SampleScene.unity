@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 573043581}
   - component: {fileID: 573043580}
   - component: {fileID: 573043582}
+  - component: {fileID: 573043583}
   m_Layer: 0
   m_Name: MLXRSession
   m_TagString: Untagged
@@ -787,6 +788,19 @@ MonoBehaviour:
   PCFsRemovedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &573043583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573043579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eac1499388544530b53a37d9e730d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pcfStatusText: {fileID: 0}
 --- !u!1 &633987594
 GameObject:
   m_ObjectHideFlags: 0

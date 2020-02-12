@@ -40,6 +40,13 @@ namespace MagicLeapTools
         public bool debugOutgoing;
         public bool debugIncoming;
 
+        //public PCFSystem pcfSystem;
+        public delegate Pose GetClosestPose(string pcfIDString);
+        private GetClosestPose getPCFPose;
+        public void SetPCFPoseDelegate(GetClosestPose sendinfo) {
+            getPCFPose = sendinfo;
+        }
+
         //Events:
         [Space]
         /// <summary>
@@ -627,11 +634,21 @@ namespace MagicLeapTools
         {
             
             Debug.Log($"Begin Spawn {resourceFileName} with coords {position} from {creator}");
-                    
+            
             //already exists;
             if (TransmissionObject.Exists(guid))
             {
                 return null;
+            }
+
+            // Hack to pass in a PCFID to parent this spawned object to. 
+            string PCFIDString = null;
+            if (resourceFileName.Contains(":")){
+                string[] ResourceTokens = resourceFileName.Split(new char[]{':'});
+                if (ResourceTokens.Length == 2){
+                    resourceFileName = ResourceTokens[0];
+                    PCFIDString = ResourceTokens[1];
+                }
             }
 
             //find:
@@ -671,15 +688,35 @@ namespace MagicLeapTools
             spawned.resourceFileName = resourceFileName;
             spawned.creator = creator;
 
-            //parenting:
-            spawned.transform.parent = TransmissionRoot.Get(creator).transform;
-            spawned.targetPosition = position;
-            spawned.targetRotation = rotation;
-            spawned.targetScale = scale;
-            spawned.transform.localPosition = position;
-            spawned.transform.localRotation = rotation;
-            spawned.transform.localScale = scale;
+            if (PCFIDString != null){
+                // If we passed in a PCF ID Then find that PCF and parent this new game object to that. 
+                Pose pcfPose = Transmission.Instance.getPCFPose(PCFIDString);
 
+                var transformHelper = new GameObject("(TransformHelper)").transform;
+                transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
+                transformHelper.SetPositionAndRotation(pcfPose.position, pcfPose.rotation);
+                
+                Vector3 positionOffset = transformHelper.InverseTransformPoint(position);
+                Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * rotation;
+
+                spawned.transform.parent = transformHelper;
+                spawned.targetPosition = positionOffset;
+                spawned.targetRotation = rotationOffset;
+                spawned.targetScale = scale;
+                spawned.transform.localPosition = positionOffset;
+                spawned.transform.localRotation = rotationOffset;
+                spawned.transform.localScale = scale;
+            } else {
+                // Otherwise Parent it to the Transmission Root (Creater/Player)
+                spawned.transform.parent = TransmissionRoot.Get(creator).transform;
+                spawned.targetPosition = position;
+                spawned.targetRotation = rotation;
+                spawned.targetScale = scale;
+                spawned.transform.localPosition = position;
+                spawned.transform.localRotation = rotation;
+                spawned.transform.localScale = scale;
+            }
+        
             Debug.Log($"End Spawn {resourceFileName} with local coords {spawned.transform.localPosition} world coords {spawned.transform.position} parent {spawned.transform.parent.position} from {creator}");
 
             return spawned;
