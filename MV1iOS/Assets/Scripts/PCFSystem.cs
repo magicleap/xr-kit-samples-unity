@@ -68,6 +68,8 @@ public class PCFSystem : MonoBehaviour
     {
         Pose pose = new Pose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));;
                             // Find PCF
+        Debug.Log($"PoseForPCFID with PCFID: {pcfId}");
+
 #if PLATFORM_LUMIN
         List<MLPCF> allPcfs = new List<MLPCF>();
         if (MLPersistentCoordinateFrames.GetAllPCFs(out allPcfs).IsOk)
@@ -97,6 +99,8 @@ public class PCFSystem : MonoBehaviour
             Debug.Log("PoseForPCFID Error: No Matching Pcf found");
         }
 #endif
+        Debug.Log($"PoseForPCFID Returning Pose: {pose}");
+
         return pose;
     }
 
