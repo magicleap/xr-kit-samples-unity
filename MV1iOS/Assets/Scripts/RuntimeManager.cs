@@ -62,35 +62,8 @@ public class RuntimeManager : MonoBehaviour
         }
     }
 
-    public void PCFsAdded() {
-        foreach (var to in spawnedAndUnattachedGameObjects){
-            var objPos = to.transform.position;
-            var pcfList = MagicversePcfManager.PCFListSortedByDistanceTo(objPos);
-            if (pcfList.Count > 0) {
-                MagicversePcfManager.PcfPoseData pcfToBindTo = pcfList[0].Value;
-                AttachToPCF(to, pcfToBindTo.position, pcfToBindTo.rotation);
-            }
-        }
-        // we've added them to the attached list, clear from here.
-        spawnedAndUnattachedGameObjects.Clear();
-    }
 #endif
 
-    void AttachToPCF(GameObject transmissionObject, Vector3 pcfPosition, Quaternion pcfRotation){
-
-        var transformHelper = new GameObject("(TransformHelper)").transform;
-        transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
-        transformHelper.SetPositionAndRotation(pcfPosition, pcfRotation);
-        
-        Vector3 positionOffset = transformHelper.InverseTransformPoint(transmissionObject.transform.position);
-        Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * transmissionObject.transform.rotation;
-
-        //transmissionObject.transform.SetParent(transformHelper);
-        transmissionObject.GetComponent<TransmissionObject>().targetPosition = positionOffset;
-        transmissionObject.GetComponent<TransmissionObject>().targetRotation = rotationOffset;
-        
-        attachedGameObjects.Add(transmissionObject.gameObject);
-    }
     void SpawnAndAttachToPCF(string resourceName, Vector3 objPosition, string pcfid, Vector3 pcfPosition, Quaternion pcfRotation)
     {
         // bind the object to the PCF
