@@ -63,10 +63,9 @@ public class PCFSystem : MonoBehaviour
     }
 
     Func<Vector3, Quaternion, Pose> returnPose = (p,r) => { return new Pose(p, r); };
-    public Pose PoseForPCFID(string pcfId)
-    {
-        Pose pose = new Pose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));;
-                            // Find PCF
+    public void PoseForPCFID(string pcfId, Action<bool, Pose> poseHandler)
+    {                            
+        // Find PCF
         Debug.Log($"PoseForPCFID with PCFID: {pcfId}");
 
 #if PLATFORM_LUMIN
@@ -81,8 +80,12 @@ public class PCFSystem : MonoBehaviour
                     {
                         if (result.IsOk)
                         {
-                            pose = returnPose(posedPCF.Position, posedPCF.Orientation);
+                            Pose pose  = returnPose(posedPCF.Position, posedPCF.Orientation);
                             Debug.Log($"PoseForPCFID callback PCF: {mlPCF} Returning Pose: {pose}");
+                            poseHandler(true, pose);
+                        } else {
+                            Debug.Log("PoseForPCFID Error: No Matching Pcf found");
+                            poseHandler(false, returnPose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)));
                         }
                     });
                 }
@@ -92,16 +95,16 @@ public class PCFSystem : MonoBehaviour
         if (MagicversePcfManager.PcfPoseLookup.ContainsKey(pcfId))
         {
             MagicversePcfManager.PcfPoseData poseData = MagicversePcfManager.PcfPoseLookup[pcfId];
-            pose = returnPose(poseData.position, poseData.rotation);
+            Pose pose = returnPose(poseData.position, poseData.rotation);
+            Debug.Log($"PoseForPCFID callback PCF: {pcfId} Returning Pose: {pose}");
+            poseHandler(true, pose);
 
         } else
         {
             Debug.Log("PoseForPCFID Error: No Matching Pcf found");
+            poseHandler(false, returnPose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)));
         }
 #endif
-        Debug.Log($"PoseForPCFID Returning Pose: {pose}");
-
-        return pose;
     }
 
 

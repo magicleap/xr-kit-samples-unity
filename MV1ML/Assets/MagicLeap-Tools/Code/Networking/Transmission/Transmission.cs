@@ -41,9 +41,9 @@ namespace MagicLeapTools
         public bool debugIncoming;
 
         //public PCFSystem pcfSystem;
-        public delegate Pose GetClosestPose(string pcfIDString);
-        private GetClosestPose getPCFPose;
-        public void SetPCFPoseDelegate(GetClosestPose sendinfo) {
+        public delegate void PoseForPCFID(string pcfId, Action<bool, Pose> poseHandler);
+        private PoseForPCFID getPCFPose;
+        public void SetPCFPoseDelegate(PoseForPCFID sendinfo) {
             getPCFPose = sendinfo;
         }
 
@@ -690,22 +690,26 @@ namespace MagicLeapTools
 
             if (PCFIDString != null){
                 // If we passed in a PCF ID Then find that PCF and parent this new game object to that. 
-                Pose pcfPose = Transmission.Instance.getPCFPose(PCFIDString);
+                Transmission.Instance.getPCFPose(PCFIDString, 
+                (bool result, Pose pose) => {{
+                    var transformHelper = new GameObject("(TransformHelper)").transform;
+                    transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
+                    transformHelper.SetPositionAndRotation(pose.position, pose.rotation);
+                    
+                    Vector3 positionOffset = transformHelper.InverseTransformPoint(position);
+                    Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * rotation;
 
-                var transformHelper = new GameObject("(TransformHelper)").transform;
-                transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
-                transformHelper.SetPositionAndRotation(pcfPose.position, pcfPose.rotation);
-                
-                Vector3 positionOffset = transformHelper.InverseTransformPoint(position);
-                Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * rotation;
+                    spawned.transform.parent = transformHelper;
+                    spawned.targetPosition = positionOffset;
+                    spawned.targetRotation = rotationOffset;
+                    spawned.targetScale = scale;
+                    spawned.transform.localPosition = positionOffset;
+                    spawned.transform.localRotation = rotationOffset;
+                    spawned.transform.localScale = scale;
 
-                spawned.transform.parent = transformHelper;
-                spawned.targetPosition = positionOffset;
-                spawned.targetRotation = rotationOffset;
-                spawned.targetScale = scale;
-                spawned.transform.localPosition = positionOffset;
-                spawned.transform.localRotation = rotationOffset;
-                spawned.transform.localScale = scale;
+                    Debug.Log($"End Spawn callback {resourceFileName} with local coords {spawned.transform.localPosition} world coords {spawned.transform.position} parent {spawned.transform.parent.position} from {creator}");
+
+                }});
             } else {
                 // Otherwise Parent it to the Transmission Root (Creater/Player)
                 spawned.transform.parent = TransmissionRoot.Get(creator).transform;
@@ -715,9 +719,10 @@ namespace MagicLeapTools
                 spawned.transform.localPosition = position;
                 spawned.transform.localRotation = rotation;
                 spawned.transform.localScale = scale;
+
+                Debug.Log($"End Spawn {resourceFileName} with local coords {spawned.transform.localPosition} world coords {spawned.transform.position} parent {spawned.transform.parent.position} from {creator}");
             }
         
-            Debug.Log($"End Spawn {resourceFileName} with local coords {spawned.transform.localPosition} world coords {spawned.transform.position} parent {spawned.transform.parent.position} from {creator}");
 
             return spawned;
         }
