@@ -4,21 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using MagicLeapTools;
 using System.Linq;
-#if PLATFORM_IOS
+#if PLATFORM_IOS // TODO: ANDROID
 using MagicLeap.XR.XRKit;
 #endif
+
+// TODO: if PLATFORM_LUMIN Add basic cube placement using MLControl trigger
 
 public class RuntimeManager : MonoBehaviour
 {
     public Text info;
     private string _initialInfo;
-    List<GameObject> spawnedAndUnattachedGameObjects;
     List<GameObject> attachedGameObjects;
+
+    [Tooltip("A prefab located in the resource folder with TransmissionObject on it, which is needed for spawning across the network")]
+    public GameObject resourceToSpawn; 
 
     void Awake()
     {
          _initialInfo = info.text;
-        spawnedAndUnattachedGameObjects = new List<GameObject>();
         attachedGameObjects = new List<GameObject>();
     }
 
@@ -50,13 +53,11 @@ public class RuntimeManager : MonoBehaviour
             var pcfList = MagicversePcfManager.PCFListSortedByDistanceTo(objPos);
             if (pcfList.Count > 0) {
                 MagicversePcfManager.PcfPoseData pcfToBindTo = pcfList[0].Value;
-                SpawnAndAttachToPCF(objPos, pcfToBindTo.position, pcfToBindTo.rotation);
+                SpawnAndAttachToPCF(resourceToSpawn.name, objPos, pcfToBindTo.pcfId, pcfToBindTo.position, pcfToBindTo.rotation);
             } 
             else{
-                // cant bind yet. Spawn locally but update when PCF lists are obtained from PCFsAdded callback.
-                TransmissionObject characterTransmissionObject = Transmission.Spawn("Dummy", objPos, Quaternion.identity, Vector3.one);
-                spawnedAndUnattachedGameObjects.Add(characterTransmissionObject.gameObject);
-                Debug.LogWarning("Spawned but not attached to PCF");
+               
+                Debug.LogWarning("No PCFs to attach to yet, are y9ou logged in to the mlcloud via Oath?");
             }
         }
     }
@@ -90,8 +91,7 @@ public class RuntimeManager : MonoBehaviour
         
         attachedGameObjects.Add(transmissionObject.gameObject);
     }
-
-    void SpawnAndAttachToPCF(Vector3 objPosition, Vector3 pcfPosition, Quaternion pcfRotation)
+    void SpawnAndAttachToPCF(string resourceName, Vector3 objPosition, string pcfid, Vector3 pcfPosition, Quaternion pcfRotation)
     {
         // bind the object to the PCF
         var transformHelper = new GameObject("(TransformHelper)").transform;
@@ -101,8 +101,11 @@ public class RuntimeManager : MonoBehaviour
         Vector3 positionOffset = transformHelper.InverseTransformPoint(objPosition);
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * Quaternion.LookRotation(Vector3.forward);
 
+        // TODO: HACK: pass in the pcfid and let Transmission handle it
+        var resourceObjectGuidHack = resourceName + ":" + pcfid;
+
         // spawn everywhere and on the network using the local position and rotation (pcf offset) 
-        TransmissionObject characterTransmissionObject = Transmission.Spawn("Dummy", positionOffset, rotationOffset, Vector3.one);
+        TransmissionObject characterTransmissionObject = Transmission.Spawn(resourceObjectGuidHack, positionOffset, rotationOffset, Vector3.one);
         
         attachedGameObjects.Add(characterTransmissionObject.gameObject);
     }
