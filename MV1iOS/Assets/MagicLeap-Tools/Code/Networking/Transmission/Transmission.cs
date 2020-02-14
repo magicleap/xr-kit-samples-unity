@@ -696,15 +696,12 @@ namespace MagicLeapTools
                     transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
                     transformHelper.SetPositionAndRotation(pose.position, pose.rotation);
                     
-                    Vector3 positionOffset = transformHelper.InverseTransformPoint(position);
-                    Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * rotation;
-
                     spawned.transform.parent = transformHelper;
-                    spawned.targetPosition = positionOffset;
-                    spawned.targetRotation = rotationOffset;
+                    spawned.targetPosition = position;
+                    spawned.targetRotation = rotation;
                     spawned.targetScale = scale;
-                    spawned.transform.localPosition = positionOffset;
-                    spawned.transform.localRotation = rotationOffset;
+                    spawned.transform.localPosition = position;
+                    spawned.transform.localRotation = rotation;
                     spawned.transform.localScale = scale;
 
                     Debug.Log($"End Spawn callback {resourceFileName} with local coords {spawned.transform.localPosition} world coords {spawned.transform.position} parent {spawned.transform.parent.position} from {creator}");
