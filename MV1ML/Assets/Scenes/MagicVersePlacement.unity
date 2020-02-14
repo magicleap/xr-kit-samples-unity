@@ -697,6 +697,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 1439498135}
+  testPlacement: 0
+  controlInput: {fileID: 0}
+  resourceToSpawn: {fileID: 0}
 --- !u!1001 &1138898715
 PrefabInstance:
   m_ObjectHideFlags: 0

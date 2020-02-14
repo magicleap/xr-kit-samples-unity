@@ -6,6 +6,8 @@ using MagicLeapTools;
 using System.Linq;
 #if PLATFORM_IOS // TODO: ANDROID
 using MagicLeap.XR.XRKit;
+#elif PLATFORM_LUMIN
+using UnityEngine.XR.MagicLeap;
 #endif
 
 // TODO: if PLATFORM_LUMIN Add basic cube placement using MLControl trigger
@@ -16,20 +18,36 @@ public class RuntimeManager : MonoBehaviour
     private string _initialInfo;
     List<GameObject> attachedGameObjects;
 
-    [Tooltip("A prefab located in the resource folder with TransmissionObject on it, which is needed for spawning across the network")]
+    [Tooltip("Disable this if you dont want to use the test placement methods in this class")]
+    public bool testPlacement = true; 
+
+    #if PLATFORM_LUMIN
+    [Tooltip("Needed only if Test Placement is checked to use control for testing object placement")]
+
+    public ControlInput controlInput;
+    #endif
+
+    [Tooltip("A prefab located in the resource folder with TransmissionObject on it, which is needed for spawning across the network, will only be used if Test Placement is checked")]
     public GameObject resourceToSpawn; 
 
     void Awake()
     {
          _initialInfo = info.text;
         attachedGameObjects = new List<GameObject>();
+
+        #if PLATFORM_LUMIN
+            if (testPlacement)
+                controlInput.OnTriggerDown.AddListener(HandleTriggerDown);
+        #endif
+
     }
 
     // Update is called once per frame
     private void Update()
     {
         #if PLATFORM_IOS
-            UpdateTouches();
+            if (testPlacement)
+                UpdateTouches();
         #endif
 
         string output = _initialInfo + System.Environment.NewLine;
@@ -57,9 +75,23 @@ public class RuntimeManager : MonoBehaviour
             } 
             else{
                
-                Debug.LogWarning("No PCFs to attach to yet, are y9ou logged in to the mlcloud via Oath?");
+                Debug.LogWarning("No PCFs to attach to yet, are you logged in to the mlcloud via Oath?");
             }
         }
+    }
+
+#elif PLATFORM_LUMIN
+    private void HandleTriggerDown()
+    {
+            Vector3 objPos = controlInput.Position;
+            objPos.z += 5;
+
+            // Sort the list of PCFs by distance to where the object will be spawned and retreive the first pcf in the list (since its the closest)
+            var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(objPos,
+            (MLResult result, MLPCF pcfToBindTo) =>
+            {
+                SpawnAndAttachToPCF(resourceToSpawn.name, objPos, pcfToBindTo.CFUID.ToString(), pcfToBindTo.Position, pcfToBindTo.Orientation);
+            });
     }
 
 #endif
