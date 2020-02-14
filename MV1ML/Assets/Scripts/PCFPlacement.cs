@@ -74,11 +74,6 @@ public class PCFPlacement : MonoBehaviour
     {
         if (_placementPrefabs != null && _placementPrefabs.Length > _placementIndex)
         {
-            //var resourceObject = _placementPrefabs[_placementIndex].name;
-            //TransmissionObject content = Transmission.Spawn(resourceObject, position, rotation, Vector3.one);
-            //_placement.Resume();
-
-            // Transmission.Spawn() instead
             var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(position,
             (MLResult result, MLPCF pcf) =>
             {
@@ -92,6 +87,8 @@ public class PCFPlacement : MonoBehaviour
 
                  // spawn everywhere and on the network using the local position and rotation (pcf offset) 
                 var resourceObject = _placementPrefabs[_placementIndex].name;
+
+                Debug.Log($"Placement Complete, attaching {resourceObject} with world coords p:{position} r:{rotation} attaching to PCF {pcf.CFUID.ToString()} at coords p:{pcf.Position}, r:{pcf.Orientation}, converting local coords: p:{positionOffset}, r:{rotationOffset}");
 
                 // HACK resourceObjectName and appeand the PCF GUID. Transmission will break this apart internally 
                 // (assuming we are using a hacked version of transmission).
