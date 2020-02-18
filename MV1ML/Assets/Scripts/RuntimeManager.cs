@@ -23,7 +23,6 @@ public class RuntimeManager : MonoBehaviour
 
     #if PLATFORM_LUMIN
     [Tooltip("Needed only if Test Placement is checked to use control for testing object placement")]
-
     public ControlInput controlInput;
     #endif
 

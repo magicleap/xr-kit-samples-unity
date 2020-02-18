@@ -9,7 +9,7 @@ using MagicLeap;
 public class PCFPlacement : MonoBehaviour
 {
     [SerializeField, Tooltip("The controller that is used in the scene to cycle and place objects.")]
-    private ControllerConnectionHandler _controllerConnectionHandler = null;
+    private ControlInput _controller = null;
 
     [SerializeField, Tooltip("The placement objects that are used in the scene.")]
     private GameObject[] _placementPrefabs = null;
@@ -20,17 +20,10 @@ public class PCFPlacement : MonoBehaviour
 
     void Start()
     {
-        if (_controllerConnectionHandler == null)
-        {
-            Debug.LogError("Error: PlacementExample._controllerConnectionHandler is not set, disabling script.");
-            enabled = false;
-            return;
-        }
-
         _placement = GetComponent<Placement>();
 
-        MLInput.OnControllerButtonDown += HandleOnButtonDown;
-        MLInput.OnTriggerDown += HandleOnTriggerDown;
+        _controller.OnBumperDown.AddListener(HandleOnButtonDown);
+        _controller.OnTriggerDown.AddListener(HandleOnTriggerDown);
 
         StartPlacement();
     }
@@ -50,22 +43,12 @@ public class PCFPlacement : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    private void HandleOnButtonDown()
     {
-        MLInput.OnControllerButtonDown -= HandleOnButtonDown;
-        MLInput.OnTriggerDown -= HandleOnTriggerDown;
+        NextPlacementObject();
     }
 
-    private void HandleOnButtonDown(byte controllerId, MLInputControllerButton button)
-    {
-        if (_controllerConnectionHandler.IsControllerValid() && _controllerConnectionHandler.ConnectedController.Id == controllerId &&
-            button == MLInputControllerButton.Bumper)
-        {
-            NextPlacementObject();
-        }
-    }
-
-    private void HandleOnTriggerDown(byte controllerId, float pressure)
+    private void HandleOnTriggerDown()
     {
         _placement.Confirm();
     }
@@ -147,7 +130,7 @@ public class PCFPlacement : MonoBehaviour
         if (_placementObject != null)
         {
             _placement.Cancel();
-            _placement.Place(_controllerConnectionHandler.transform, _placementObject.Volume, _placementObject.AllowHorizontal, _placementObject.AllowVertical, HandlePlacementComplete);
+            _placement.Place(_controller.transform, _placementObject.Volume, _placementObject.AllowHorizontal, _placementObject.AllowVertical, HandlePlacementComplete);
         }
     }
 
