@@ -120,179 +120,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &67985773
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 67985774}
-  - component: {fileID: 67985776}
-  - component: {fileID: 67985775}
-  m_Layer: 0
-  m_Name: Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &67985774
+--- !u!4 &67985774 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641863885544834082}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67985773}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 234904009}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &67985775
+--- !u!114 &67985776 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1641863885612655954, guid: f15535eb78d914b39a37e0c82a5c613b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641863885544834082}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67985773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2647cb0351ee0149906d03334d7f4e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlInput: {fileID: 67985776}
-  triggerDown:
-    enabled: 1
-    pattern: 1
-    instensity: 2
-  touchDown:
-    enabled: 1
-    pattern: 1
-    instensity: 1
-  touchUp:
-    enabled: 1
-    pattern: 1
-    instensity: 0
-  forceTouchDown:
-    enabled: 1
-    pattern: 6
-    instensity: 2
-  forceTouchUp:
-    enabled: 1
-    pattern: 7
-    instensity: 2
-  radialMove:
-    enabled: 1
-    pattern: 5
-    instensity: 0
-  triggerHold:
-    enabled: 1
-    pattern: 6
-    instensity: 2
-  bumperHold:
-    enabled: 1
-    pattern: 6
-    instensity: 2
-  touchHold:
-    enabled: 1
-    pattern: 6
-    instensity: 2
---- !u!114 &67985776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67985773}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30755e2e602720443aed01c47e4fb5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handedness: 0
-  followControl: 1
-  OnControlConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnControlDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerPressBegan:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerDown:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDoubleTrigger:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerUp:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerPressEnded:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerHold:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerMove:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHomeButtonTap:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDoubleHome:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBumperDown:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDoubleBumper:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBumperUp:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBumperHold:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchDown:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDoubleTap:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchUp:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchMove:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchRadialMove:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchHold:
-    m_PersistentCalls:
-      m_Calls: []
-  OnForceTouchDown:
-    m_PersistentCalls:
-      m_Calls: []
-  OnForceTouchUp:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchBeganMoving:
-    m_PersistentCalls:
-      m_Calls: []
-  OnSwipe:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTapped:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &234904008
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +470,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _privileges: 57010000ab0000006f010000
+--- !u!1 &809998182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809998183}
+  m_Layer: 0
+  m_Name: '[NETWORKING]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &809998183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809998182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2036568626}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &844377780
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +592,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 786827900}
-  - {fileID: 2036568626}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1377,7 +1252,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 906713484}
+    m_TransformParent: {fileID: 809998183}
     m_Modifications:
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
@@ -1397,17 +1272,17 @@ PrefabInstance:
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
@@ -1417,7 +1292,7 @@ PrefabInstance:
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3711491077353356965, guid: 73ecca7d038a8314d8f6e3d68ba973e1,
         type: 3}
@@ -1634,3 +1509,72 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2084427523}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1641863885544834082
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 234904009}
+    m_Modifications:
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655948, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641863885612655951, guid: f15535eb78d914b39a37e0c82a5c613b,
+        type: 3}
+      propertyPath: m_Name
+      value: Control
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f15535eb78d914b39a37e0c82a5c613b, type: 3}
