@@ -41,8 +41,6 @@ public class PCFSystem : MonoBehaviour
         {
             _pcfStatusText.text = "Status: Requesting Privileges";
         }
-
-        Transmission.Instance.SetPCFPoseDelegate(PoseForPCFID);
     }
 
     void Start()

@@ -29,6 +29,9 @@ public class RuntimeManager : MonoBehaviour
     [Tooltip("A prefab located in the resource folder with TransmissionObject on it, which is needed for spawning across the network, will only be used if Test Placement is checked")]
     public GameObject resourceToSpawn; 
 
+    [Tooltip("Used to establish a delegate for networking to obtain the closest PCF")]
+    public PCFSystem pCFSystem;
+
     void Awake()
     {
          _initialInfo = info.text;
@@ -39,6 +42,8 @@ public class RuntimeManager : MonoBehaviour
                 controlInput.OnTriggerDown.AddListener(HandleTriggerDown);
         #endif
 
+        // Set the delegate for Transmission to use to obtain
+        Transmission.Instance.SetPCFPoseDelegate(pCFSystem.PoseForPCFID);
     }
 
     // Update is called once per frame
