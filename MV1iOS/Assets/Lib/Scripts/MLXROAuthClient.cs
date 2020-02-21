@@ -28,7 +28,9 @@ public class MLXROAuthClient : Assets.UnityAuthClient
         {
             Authority = "https://oauth.magicleap.com",
             ClientId = clientId,
-            Scope = "openid profile offline_access",
+            Scope = "openid offline_access",
+            // HACK: remove profile. external credentials will not have the "profile" scope provided (where it gives you back your name once you sign in)  for security reasons
+            // Scope = "openid profile offline_access",
             // Redirect (reply) uri is specified in the AndroidManifest and code for handling
             // it is in the associated AndroidUnityPlugin project, and OAuthUnityAppController.mm.
             RedirectUri = $"{uriScheme}://{uriHost}",
