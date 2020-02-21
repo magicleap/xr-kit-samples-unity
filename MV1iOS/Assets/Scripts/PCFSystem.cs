@@ -25,8 +25,9 @@ using MagicLeap.XR.XRKit;
 
 public class PCFSystem : MonoBehaviour
 {
+#if PLATFORM_IOS
     public MLXRSession MLXRSessionInstance;
-
+#endif
     public class PcfPoseData
     {
         public string pcfId;
@@ -132,34 +133,34 @@ public class PCFSystem : MonoBehaviour
 
 #if PLATFORM_IOS
     public void HandleAnchorsChanged(MLXRSession.AnchorsUpdatedEventArgs e)
+    {
+        foreach (MLXRAnchor anchor in e.added)
         {
-            foreach (MLXRAnchor anchor in e.added)
+            Debug.Log("PCF: ADD " + anchor.id);
+            string anchorString = anchor.id.ToString();
+            if (!PcfPoseLookup.ContainsKey(anchorString))
             {
-                Debug.Log("PCF: ADD " + anchor.id);
-                string anchorString = anchor.id.ToString();
-                if (!PcfPoseLookup.ContainsKey(anchorString))
+                PcfPoseLookup[anchorString] = (new PcfPoseData()
                 {
-                    PcfPoseLookup[anchorString] = (new PcfPoseData()
-                    {
-                        pcfId = anchorString,
-                        position = anchor.pose.position,
-                        rotation = anchor.pose.rotation
-                    });
-                }
+                    pcfId = anchorString,
+                    position = anchor.pose.position,
+                    rotation = anchor.pose.rotation
+                });
             }
-        
-            foreach (MLXRAnchor anchor in e.removed)
+        }
+    
+        foreach (MLXRAnchor anchor in e.removed)
+        {
+            Debug.Log("PCF: REMOVE " + anchor.id);
+            string anchorString = anchor.id.ToString();
+            if (PcfPoseLookup.ContainsKey(anchorString))
             {
-                Debug.Log("PCF: REMOVE " + anchor.id);
-                string anchorString = anchor.id.ToString();
-                if (PcfPoseLookup.ContainsKey(anchorString))
-                {
-                    PcfPoseLookup.Remove(anchorString);
-                }
+                PcfPoseLookup.Remove(anchorString);
             }
+        }
 
-            foreach (MLXRAnchor anchor in e.updated)
-            {
+        foreach (MLXRAnchor anchor in e.updated)
+        {
             string anchorString = anchor.id.ToString();
             if (PcfPoseLookup.ContainsKey(anchorString))
             {
