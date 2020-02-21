@@ -67,9 +67,9 @@ public class RuntimeManager : MonoBehaviour
             Vector3 objPos = Camera.main.ScreenToWorldPoint (fingerPos);
 
             // Sort the list of PCFs by distance to where the object will be spawned and retreive the first pcf in the list (since its the closest)
-            var pcfList = MagicversePcfManager.PCFListSortedByDistanceTo(objPos);
+            var pcfList = PCFSystem.PCFListSortedByDistanceTo(objPos);
             if (pcfList.Count > 0) {
-                MagicversePcfManager.PcfPoseData pcfToBindTo = pcfList[0].Value;
+                PcfPoseData pcfToBindTo = pcfList[0].Value;
                 SpawnAndAttachToPCF(resourceToSpawn.name, objPos, pcfToBindTo.pcfId, pcfToBindTo.position, pcfToBindTo.rotation);
             } 
             else{

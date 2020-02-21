@@ -25,6 +25,22 @@ using MagicLeap.XR.XRKit;
 
 public class PCFSystem : MonoBehaviour
 {
+    public MLXRSession MLXRSessionInstance;
+
+    public class PcfPoseData
+    {
+        public string pcfId;
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+
+    public static Dictionary<string, PcfPoseData> PcfPoseLookup = new Dictionary<string, PcfPoseData>();
+    public static List<KeyValuePair<string, PcfPoseData>> PCFListSortedByDistanceTo(Vector3 objPos){
+        var pcfList = PcfPoseLookup.ToList();
+        pcfList = pcfList.OrderBy(p => Vector3.Distance(objPos, p.Value.position)).ToList();
+        return pcfList;
+    }
+
     public enum PCFStatus
     {
         Unavailable,
@@ -49,6 +65,13 @@ public class PCFSystem : MonoBehaviour
     {
 #if PLATFORM_LUMIN
         StartPCFS();
+#elif PLATFORM_IOS
+        if (MLXRSessionInstance == null)
+        {
+            Debug.LogError("Don't have a reference to an MLXRSessionInstance.");
+        }
+        // Register for the Anchor callbacks
+        MLXRSessionInstance.anchorsChanged += HandleAnchorsChanged;
 #endif
     }
 
@@ -92,9 +115,9 @@ public class PCFSystem : MonoBehaviour
             }
         }
 #elif UNITY_IOS || UNITY_ANDROID
-        if (MagicversePcfManager.PcfPoseLookup.ContainsKey(pcfId))
+        if (PcfPoseLookup.ContainsKey(pcfId))
         {
-            MagicversePcfManager.PcfPoseData poseData = MagicversePcfManager.PcfPoseLookup[pcfId];
+            PcfPoseData poseData = PcfPoseLookup[pcfId];
             Pose pose = returnPose(poseData.position, poseData.rotation);
             Debug.Log($"PoseForPCFID callback PCF: {pcfId} Returning Pose: {pose}");
             poseHandler(true, pose);
@@ -107,6 +130,45 @@ public class PCFSystem : MonoBehaviour
 #endif
     }
 
+#if PLATFORM_IOS
+    public void HandleAnchorsChanged(MLXRSession.AnchorsUpdatedEventArgs e)
+        {
+            foreach (MLXRAnchor anchor in e.added)
+            {
+                Debug.Log("PCF: ADD " + anchor.id);
+                string anchorString = anchor.id.ToString();
+                if (!PcfPoseLookup.ContainsKey(anchorString))
+                {
+                    PcfPoseLookup[anchorString] = (new PcfPoseData()
+                    {
+                        pcfId = anchorString,
+                        position = anchor.pose.position,
+                        rotation = anchor.pose.rotation
+                    });
+                }
+            }
+        
+            foreach (MLXRAnchor anchor in e.removed)
+            {
+                Debug.Log("PCF: REMOVE " + anchor.id);
+                string anchorString = anchor.id.ToString();
+                if (PcfPoseLookup.ContainsKey(anchorString))
+                {
+                    PcfPoseLookup.Remove(anchorString);
+                }
+            }
+
+            foreach (MLXRAnchor anchor in e.updated)
+            {
+            string anchorString = anchor.id.ToString();
+            if (PcfPoseLookup.ContainsKey(anchorString))
+            {
+                PcfPoseLookup[anchorString].position = anchor.pose.position;
+                PcfPoseLookup[anchorString].rotation = anchor.pose.rotation;
+            }
+        }
+    }
+#endif
 
 #if PLATFORM_LUMIN
 
