@@ -768,26 +768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MLXRSessionInstance: {fileID: 573043580}
-  PCFsAddedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1714937393}
-        m_MethodName: PCFsAdded
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  PCFsUpdatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  PCFsRemovedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &573043583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,6 +1402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 1096844205}
+  testPlacement: 1
   resourceToSpawn: {fileID: 5327960270370931286, guid: b97e9918ec51b47bfbccf4b990c28fa5,
     type: 3}
 --- !u!4 &1714937394

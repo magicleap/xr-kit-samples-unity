@@ -26,19 +26,6 @@ namespace MagicLeap.XR.XRKit
 #if UNITY_IOS || UNITY_ANDROID
         public MLXRSession MLXRSessionInstance;
 
-        [System.Serializable]
-        public class PCFsChangedEvent : UnityEvent
-        {
-        }
-        public PCFsChangedEvent PCFsAddedEvent;
-        public PCFsChangedEvent PCFsUpdatedEvent;
-        public PCFsChangedEvent PCFsRemovedEvent;
-
-        private bool LoggedLocalizedOnce = false;
-
-        private GameObject childContainer;
-        private int numAnchors = 0;
-
         public class PcfPoseData
         {
             public string pcfId;
@@ -83,7 +70,6 @@ namespace MagicLeap.XR.XRKit
 
         public void HandleAnchorsChanged(MLXRSession.AnchorsUpdatedEventArgs e)
         {
-            int added = 0;
             foreach (MLXRAnchor anchor in e.added)
             {
                 Debug.Log("PCF: ADD " + anchor.id);
@@ -96,13 +82,9 @@ namespace MagicLeap.XR.XRKit
                         position = anchor.pose.position,
                         rotation = anchor.pose.rotation
                     });
-                    added++;
                 }
             }
-            if (added>0)
-                PCFsAddedEvent?.Invoke();
-            
-            int removed = 0;
+         
             foreach (MLXRAnchor anchor in e.removed)
             {
                 Debug.Log("PCF: REMOVE " + anchor.id);
@@ -110,13 +92,9 @@ namespace MagicLeap.XR.XRKit
                 if (PcfPoseLookup.ContainsKey(anchorString))
                 {
                     PcfPoseLookup.Remove(anchorString);
-                    removed++;
                 }
             }
-            if (removed>0)
-                PCFsRemovedEvent?.Invoke();
 
-            int updated = 0;
             foreach (MLXRAnchor anchor in e.updated)
             {
                 string anchorString = anchor.id.ToString();
@@ -124,11 +102,8 @@ namespace MagicLeap.XR.XRKit
                 {
                     PcfPoseLookup[anchorString].position = anchor.pose.position;
                     PcfPoseLookup[anchorString].rotation = anchor.pose.rotation;
-                    updated++;
                 }
             }
-            if (updated>0)
-                PCFsUpdatedEvent?.Invoke();
         }
 #endif
     }
