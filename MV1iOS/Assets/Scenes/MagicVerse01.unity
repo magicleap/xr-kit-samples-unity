@@ -376,7 +376,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223974229}
-  - component: {fileID: 223974228}
   - component: {fileID: 223974227}
   m_Layer: 0
   m_Name: Debugger
@@ -400,25 +399,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   display: {fileID: 40919615}
   DelayCollectionSeconds: 2
---- !u!114 &223974228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5996068851371655398, guid: d61cc54d6478048649d99b702cfe6252,
-    type: 3}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223974226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a382cba38e404d03883e08e7a9e0b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MLXRSessionInstance: {fileID: 573043580}
-  AnchorVisual: {fileID: 1959312376087704, guid: 19270db00845f45f79994d0e2915addd,
-    type: 3}
-  AnchorVisualUpdateRate: 0.1
-  debugText: {fileID: 633987596}
-  cam: {fileID: 984154720}
 --- !u!4 &223974229
 Transform:
   m_ObjectHideFlags: 0
@@ -767,7 +747,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MLXRSessionInstance: {fileID: 573043580}
-  _pcfStatusText: {fileID: 0}
+  _pcfStatusText: {fileID: 633987596}
+  displayDebugVisuals: 1
+  AnchorVisualPrefab: {fileID: 362932065689034767, guid: 19270db00845f45f79994d0e2915addd,
+    type: 3}
+  AnchorVisualUpdateRate: 0.1
+  cam: {fileID: 984154720}
 --- !u!1 &633987594
 GameObject:
   m_ObjectHideFlags: 0

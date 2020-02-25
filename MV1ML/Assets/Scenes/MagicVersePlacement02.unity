@@ -809,6 +809,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pcfStatusText: {fileID: 495394316}
+  displayDebugVisuals: 0
+  AnchorVisualPrefab: {fileID: 362932065689034767, guid: 0f244e314a75c496dab10835b1e6e1b2,
+    type: 3}
+  AnchorVisualUpdateRate: 0.1
+  cam: {fileID: 2048849489}
 --- !u!114 &1124344071
 MonoBehaviour:
   m_ObjectHideFlags: 0

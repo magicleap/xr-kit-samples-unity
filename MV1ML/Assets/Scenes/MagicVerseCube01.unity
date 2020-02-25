@@ -1102,7 +1102,6 @@ MonoBehaviour:
   controlInput: {fileID: 467593021}
   resourceToSpawn: {fileID: 5327960270370931286, guid: 5467a493008b949b3aea29807fc6d3fd,
     type: 3}
-  pCFSystem: {fileID: 1714937395}
 --- !u!4 &1714937394
 Transform:
   m_ObjectHideFlags: 0
@@ -1130,6 +1129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pcfStatusText: {fileID: 102771715}
+  displayDebugVisuals: 0
+  AnchorVisualPrefab: {fileID: 362932065689034767, guid: 0f244e314a75c496dab10835b1e6e1b2,
+    type: 3}
+  AnchorVisualUpdateRate: 0.1
+  cam: {fileID: 1456948733}
 --- !u!1 &1932000861
 GameObject:
   m_ObjectHideFlags: 0

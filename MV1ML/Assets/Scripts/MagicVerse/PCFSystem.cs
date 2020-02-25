@@ -13,6 +13,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,7 @@ public class PCFSystem : MonoBehaviour
         pcfList = pcfList.OrderBy(p => Vector3.Distance(objPos, p.Value.position)).ToList();
         return pcfList;
     }
+
     public enum PCFStatus
     {
         Unavailable,
@@ -50,6 +52,14 @@ public class PCFSystem : MonoBehaviour
     PCFStatus pcfStatus = PCFStatus.Unavailable;
     public Text _pcfStatusText;
     bool pcfsStarted = false;
+
+    public bool displayDebugVisuals;
+    public PCFAnchorVisual AnchorVisualPrefab;
+    public float AnchorVisualUpdateRate = 0.1f;
+    public Camera cam;
+    private bool LoggedLocalizedOnce = false;
+    private GameObject visualParent;
+    private int numAnchors = 0;
 
     void Awake()
     {
@@ -73,6 +83,10 @@ public class PCFSystem : MonoBehaviour
         // Register for the Anchor callbacks
         MLXRSessionInstance.anchorsChanged += HandleAnchorsChanged;
 #endif
+
+        visualParent = new GameObject("Anchors");
+        visualParent.transform.parent = transform;
+
     }
 
     void OnDestroy()
@@ -130,44 +144,124 @@ public class PCFSystem : MonoBehaviour
 #endif
     }
 
+    void Update()
+    {
+        // Currently Update is just used to display debug visuals. 
+        if (displayDebugVisuals)
+            return;
+
 #if PLATFORM_IOS
-    public void HandleAnchorsChanged(MLXRSession.AnchorsUpdatedEventArgs e)
+        // Don't attempt to do anything, unless the MLXRSession has started
+        if (!MLXRSessionInstance.gameObject.activeSelf)
         {
-            foreach (MLXRAnchor anchor in e.added)
+            return;
+        }
+#endif
+        // For each existing Anchor Visual, billboard the ID to the current Headpose
+        foreach (Transform child in visualParent.transform)
+        {
+            TextMesh tm = child.gameObject.GetComponentInChildren<TextMesh>();
+            if (!tm)
             {
-                Debug.Log("PCF: ADD " + anchor.id);
-                string anchorString = anchor.id.ToString();
-                if (!PcfPoseLookup.ContainsKey(anchorString))
-                {
-                    PcfPoseLookup[anchorString] = (new PcfPoseData()
-                    {
-                        pcfId = anchorString,
-                        position = anchor.pose.position,
-                        rotation = anchor.pose.rotation
-                    });
-                }
-            }
-        
-            foreach (MLXRAnchor anchor in e.removed)
-            {
-                Debug.Log("PCF: REMOVE " + anchor.id);
-                string anchorString = anchor.id.ToString();
-                if (PcfPoseLookup.ContainsKey(anchorString))
-                {
-                    PcfPoseLookup.Remove(anchorString);
-                }
+                continue;
             }
 
-            foreach (MLXRAnchor anchor in e.updated)
+            tm.transform.LookAt(tm.transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+        }
+
+        // All direct children of the child container will represent a single Anchor
+        numAnchors = visualParent.transform.childCount;
+
+
+        StringBuilder sb = new StringBuilder();
+#if PLATFORM_IOS
+        sb.AppendFormat("Localization Status: {0}\n", MLXRSessionInstance.GetLocalizationStatus());
+
+        // Once we've localized one time, we want to start printing # of Anchors
+        if (!LoggedLocalizedOnce)
+        {
+            if (MLXRSessionInstance.IsLocalized())
             {
-                string anchorString = anchor.id.ToString();
-                if (PcfPoseLookup.ContainsKey(anchorString))
+                LoggedLocalizedOnce = true;
+            }
+        }
+#endif
+        if (LoggedLocalizedOnce)
+        {
+            sb.AppendFormat("Number of Anchors Found: {0}\n", numAnchors);
+        }
+
+        _pcfStatusText.text = sb.ToString();
+    }
+
+
+#if PLATFORM_IOS
+
+    public void HandleAnchorsChanged(MLXRSession.AnchorsUpdatedEventArgs e)
+    {
+        foreach (MLXRAnchor anchor in e.added)
+        {
+            Debug.Log("PCF: ADD " + anchor.id);
+            string anchorString = anchor.id.ToString();
+            if (!PcfPoseLookup.ContainsKey(anchorString))
+            {
+                PcfPoseLookup[anchorString] = (new PcfPoseData()
                 {
-                    PcfPoseLookup[anchorString].position = anchor.pose.position;
-                    PcfPoseLookup[anchorString].rotation = anchor.pose.rotation;
+                    pcfId = anchorString,
+                    position = anchor.pose.position,
+                    rotation = anchor.pose.rotation
+                });
+            }
+
+            if (displayDebugVisuals) 
+            {
+                Pose pose = anchor.pose;
+                PCFAnchorVisual newVisual = Instantiate(AnchorVisualPrefab, pose.position, pose.rotation);
+                newVisual.transform.parent = visualParent.transform;
+                newVisual.GetComponent<PCFAnchorVisual>().Anchor = anchor;
+            }
+        }
+    
+        foreach (MLXRAnchor anchor in e.removed)
+        {
+            Debug.Log("PCF: REMOVE " + anchor.id);
+            string anchorString = anchor.id.ToString();
+            if (PcfPoseLookup.ContainsKey(anchorString))
+            {
+                PcfPoseLookup.Remove(anchorString);
+            }
+
+            if (displayDebugVisuals) {
+                foreach (var visual in visualParent.GetComponentsInChildren<PCFAnchorVisual>()){
+                    if (visual.Anchor.id.Equals(anchor.id)){
+                        DestroyImmediate(visual.gameObject);
+                    }
                 }
             }
         }
+
+        foreach (MLXRAnchor anchor in e.updated)
+        {
+            string anchorString = anchor.id.ToString();
+            if (PcfPoseLookup.ContainsKey(anchorString))
+            {
+                PcfPoseLookup[anchorString].position = anchor.pose.position;
+                PcfPoseLookup[anchorString].rotation = anchor.pose.rotation;
+            }
+
+            if (displayDebugVisuals) {
+                foreach (var visual in visualParent.GetComponentsInChildren<PCFAnchorVisual>()){
+                    if (visual.Anchor.id.Equals(anchor.id)){
+                        Pose pose = anchor.pose;
+                        visual.gameObject.transform.position = pose.position;
+                        visual.gameObject.transform.rotation = pose.rotation;
+                        Debug.LogFormat("PCF Updated anchor: was {0}, is now {1}", visual.Anchor.ToString(), anchor.ToString());
+                        visual.Anchor = anchor;
+                    }
+                }
+            }
+        }
+    }
 #endif
 
 #if PLATFORM_LUMIN
