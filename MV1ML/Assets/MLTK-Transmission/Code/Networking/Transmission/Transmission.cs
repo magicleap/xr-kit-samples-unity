@@ -404,12 +404,17 @@ namespace MagicLeapTools
         }
 
         /// <summary>
-        /// Spawns an object from the Resources folder onto every known peer on the network.  ResourceFileName must be the unique name of a prefab in a Resource folder without the file extension.
+        /// Spawns an object from the Resources folder onto every known peer on the network.  ResourceFileName must be the unique name of a prefab in a Resource folder without the file extension. PCFid is a PCF this resource will be parented to. 
+        /// If PCFid is provided, position and rotation are offsets in local space to that PCFID
         /// </summary>
-        public static TransmissionObject Spawn(string resourceFileName, Vector3 position, Quaternion rotation, Vector3 scale)
+        public static TransmissionObject Spawn(string resourceFileName, Vector3 position, Quaternion rotation, Vector3 scale, string pcfid = null)
         {
+            var resourceAndParentPCFIdString = resourceFileName;
+            if (pcfid != null)
+                resourceAndParentPCFIdString = resourceFileName + ":" + pcfid;
+
             //spawn local:
-            TransmissionObject spawned = PerformSpawn(resourceFileName, true, NetworkUtilities.MyAddress, Guid.NewGuid().ToString(), position, rotation, scale);
+            TransmissionObject spawned = PerformSpawn(resourceAndParentPCFIdString, true, NetworkUtilities.MyAddress, Guid.NewGuid().ToString(), position, rotation, scale);
 
             //share if the spawn was successful:
             if (spawned != null)
@@ -423,7 +428,7 @@ namespace MagicLeapTools
                 //if we have peers then let them know we spawned something:
                 if (_peers.Count != 0)
                 {
-                    SpawnMessage spawnMessage = new SpawnMessage(resourceFileName, spawned.guid, position, rotation, scale);
+                    SpawnMessage spawnMessage = new SpawnMessage(resourceAndParentPCFIdString, spawned.guid, position, rotation, scale);
                     Send(spawnMessage);
                 }
             }

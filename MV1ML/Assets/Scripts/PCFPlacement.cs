@@ -72,12 +72,8 @@ public class PCFPlacement : MonoBehaviour
                 var resourceObject = _placementPrefabs[_placementIndex].name;
 
                 Debug.Log($"Placement Complete, attaching {resourceObject} with world coords p:{position} r:{rotation} attaching to PCF {pcf.CFUID.ToString()} at coords p:{pcf.Position}, r:{pcf.Orientation}, converting local coords: p:{positionOffset}, r:{rotationOffset}");
-
-                // HACK resourceObjectName and appeand the PCF GUID. Transmission will break this apart internally 
-                // (assuming we are using a hacked version of transmission).
-                var resourceObjectGuidHack = resourceObject + ":" + pcf.CFUID.ToString();
-
-                TransmissionObject content = Transmission.Spawn(resourceObjectGuidHack, positionOffset, rotationOffset, Vector3.one);
+                
+                TransmissionObject content = Transmission.Spawn(resourceObject, positionOffset, rotationOffset, Vector3.one, pcf.CFUID.ToString());
 
                  _placement.Resume();
 

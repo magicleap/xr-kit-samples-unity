@@ -104,11 +104,8 @@ public class RuntimeManager : MonoBehaviour
         Vector3 positionOffset = transformHelper.InverseTransformPoint(objPosition);
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * Quaternion.LookRotation(Vector3.forward);
 
-        // TODO: HACK: pass in the pcfid and let Transmission handle it
-        var resourceObjectGuidHack = resourceName + ":" + pcfid;
-
         // spawn everywhere and on the network using the local position and rotation (pcf offset) 
-        TransmissionObject characterTransmissionObject = Transmission.Spawn(resourceObjectGuidHack, positionOffset, rotationOffset, Vector3.one);
+        TransmissionObject characterTransmissionObject = Transmission.Spawn(resourceName, positionOffset, rotationOffset, Vector3.one, pcfid);
         
         attachedGameObjects.Add(characterTransmissionObject.gameObject);
     }
