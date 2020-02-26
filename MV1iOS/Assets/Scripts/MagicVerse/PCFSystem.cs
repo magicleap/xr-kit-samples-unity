@@ -20,13 +20,13 @@ using UnityEngine.UI;
 using MagicLeapTools;
 #if PLATFORM_LUMIN
 using UnityEngine.XR.MagicLeap;
-#elif PLATFORM_IOS
+#elif PLATFORM_IOS || PLATFORM_ANDROID
 using MagicLeap.XR.XRKit;
 #endif
 
 public class PCFSystem : MonoBehaviour
 {
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
     public MLXRSession MLXRSessionInstance;
 #endif
     public class PcfPoseData
@@ -75,7 +75,7 @@ public class PCFSystem : MonoBehaviour
     {
 #if PLATFORM_LUMIN
         StartPCFS();
-#elif PLATFORM_IOS
+#elif PLATFORM_IOS || PLATFORM_ANDROID
         if (MLXRSessionInstance == null)
         {
             Debug.LogError("Don't have a reference to an MLXRSessionInstance.");
@@ -150,7 +150,7 @@ public class PCFSystem : MonoBehaviour
         if (displayDebugVisuals)
             return;
 
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
         // Don't attempt to do anything, unless the MLXRSession has started
         if (!MLXRSessionInstance.gameObject.activeSelf)
         {
@@ -174,7 +174,7 @@ public class PCFSystem : MonoBehaviour
 
 
         StringBuilder sb = new StringBuilder();
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
         sb.AppendFormat("Localization Status: {0}\n", MLXRSessionInstance.GetLocalizationStatus());
 
         // Once we've localized one time, we want to start printing # of Anchors
@@ -195,7 +195,7 @@ public class PCFSystem : MonoBehaviour
     }
 
 
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
 
     public void HandleAnchorsChanged(MLXRSession.AnchorsUpdatedEventArgs e)
     {

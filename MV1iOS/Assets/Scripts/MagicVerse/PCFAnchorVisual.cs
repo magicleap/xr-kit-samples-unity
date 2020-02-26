@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 #if PLATFORM_LUMIN
 using UnityEngine.XR.MagicLeap;
-#elif PLATFORM_IOS
+#elif PLATFORM_IOS || PLATFORM_ANDROID
 using MagicLeap.XR.XRKit;
 #endif
 
 public class PCFAnchorVisual : MonoBehaviour
 {
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
 
     private MLXRAnchor _anchor; 
     public MLXRAnchor Anchor {

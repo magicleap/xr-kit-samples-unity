@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MagicLeapTools;
 using System.Linq;
-#if PLATFORM_IOS // TODO: ANDROID
+#if PLATFORM_IOS || PLATFORM_ANDROID
 using MagicLeap.XR.XRKit;
 #elif PLATFORM_LUMIN
 using UnityEngine.XR.MagicLeap;
@@ -45,7 +45,7 @@ public class RuntimeManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        #if PLATFORM_IOS
+        #if PLATFORM_IOS || PLATFORM_ANDROID
             if (testPlacement)
                 UpdateTouches();
         #endif
@@ -56,7 +56,7 @@ public class RuntimeManager : MonoBehaviour
         info.text = output;
     }
 
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
 
     void UpdateTouches()
     {
