@@ -545,6 +545,9 @@ MonoBehaviour:
   SignInButtonText: {fileID: 1114040580}
   SignInButton: {fileID: 1577749883}
   StatusText: {fileID: 165585583}
+  SessionToggleButton: {fileID: 0}
+  SessionToggleButtonText: {fileID: 0}
+  SessionToggleStatus: {fileID: 0}
 --- !u!4 &407438408
 Transform:
   m_ObjectHideFlags: 0
@@ -618,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ReferencePointPrefab: {fileID: 1959312376087704, guid: 19270db00845f45f79994d0e2915addd,
+  m_ReferencePointPrefab: {fileID: 1959312376087704, guid: 92d8cbcc4e864274ca705591d81f8240,
     type: 3}
 --- !u!1 &563318234
 GameObject:
@@ -719,7 +722,7 @@ MonoBehaviour:
   arSession: {fileID: 283422781}
   cameraManager: {fileID: 984154722}
   trackedPoseDriver: {fileID: 984154718}
-  requestAndroidFineLocationPermission: 0
+  requestAndroidFineLocationPermission: 1
 --- !u!4 &573043581
 Transform:
   m_ObjectHideFlags: 0
@@ -960,7 +963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Device: 0
-  m_PoseSource: 2
+  m_PoseSource: 6
   m_PoseProviderComponent: {fileID: 0}
   m_TrackingType: 0
   m_UpdateType: 0
@@ -1050,7 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4966719baa26e4b0e8231a24d9bd491a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FocusMode: 0
+  m_FocusMode: 1
   m_LightEstimationMode: 0
 --- !u!1 &1096844203
 GameObject:

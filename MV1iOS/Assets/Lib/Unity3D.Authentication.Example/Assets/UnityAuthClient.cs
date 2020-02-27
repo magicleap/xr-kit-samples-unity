@@ -115,7 +115,10 @@ namespace Assets
                 AccessToken = result.AccessToken;
                 RefreshToken = result.RefreshToken;
                 IdentityToken = result.IdentityToken;
-                UserName = result.User.Identity.Name;
+                if (result.User.Identity.Name != null)
+                {
+                    UserName = result.User.Identity.Name;
+                }
                 AccessTokenExpiration = result.AccessTokenExpiration;
 
                 KeyChain.SetString(refreshKey, RefreshToken);

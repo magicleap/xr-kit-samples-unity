@@ -122,6 +122,7 @@ PlayerSettings:
     Others: 1
   bundleVersion: 0.1
   preloadedAssets:
+  - {fileID: 7137148330389648602, guid: f81a6fbe7841942ac9a818f139ee63b7, type: 2}
   - {fileID: 11400000, guid: 4a0d98ada496a4b3fa3a3ee66915667f, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -251,7 +252,7 @@ PlayerSettings:
   iOSManualSigningProvisioningProfileType: 0
   tvOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 1
-  iOSRequireARKit: 1
+  iOSRequireARKit: 0
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea

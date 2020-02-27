@@ -26,12 +26,18 @@ namespace Assets
         private bool _signedIn;
         private const double MaxSecondsToWaitForAuthReply = 3;
         private const double expirationOffsetMinutes = -30;
+        public Button SessionToggleButton;
+        public Text SessionToggleButtonText;
+        public Text SessionToggleStatus;
 
         private async void Start()
         {
             _authClient = new MLXROAuthClient();
             Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
             Debug.Log("SignInBehavior::Start");
+
+            EnableSessionToggleButton(false);
+
             if (_authClient.RefreshToken != null)
             {
                 EnableSignInButton(false);
@@ -64,6 +70,57 @@ namespace Assets
             EnableSignInButton(true);
         }
 
+        private void StopSession()
+        {
+            bool result = mlxrSession.StopSession();
+            if (SessionToggleStatus)
+            {
+                SessionToggleStatus.text = result
+                    ? "Session stopped successfully."
+                    : "Session stopped with error.";
+            }
+            if (SessionToggleButtonText)
+            {
+                SessionToggleButtonText.text = "Start Session";
+            }
+        }
+
+        private void StartSession()
+        {
+            if (_authClient.AccessToken != null)
+            {
+                mlxrSession.SessionUpdateToken(_authClient.AccessToken);
+            }
+            if (SessionToggleStatus)
+            {
+                SessionToggleStatus.text = "Session started.";
+            }
+            if (SessionToggleButtonText)
+            {
+                SessionToggleButtonText.text = "Stop Session";
+            }
+        }
+
+        public void OnSessionToggleClicked()
+        {
+            if (mlxrSession.enabled)
+            {
+                StopSession();
+            }
+            else
+            {
+                StartSession();
+            }
+        }
+
+        private void EnableSessionToggleButton(bool enable)
+        {
+            if (SessionToggleButton)
+            {
+                SessionToggleButton.interactable = enable;
+            }
+        }
+
         private async Task SignIn()
         {
             Debug.Log("SignInBehavior::Signing in...");
@@ -75,7 +132,8 @@ namespace Assets
             if (_signedIn)
             {
                 StatusText.GetComponent<Text>().text = "Hello " + _authClient.UserName;
-                mlxrSession.StartSession(_authClient.AccessToken);
+                EnableSessionToggleButton(true);
+                StartSession();
             }
             else if (_signinCancelled)
             {
@@ -98,13 +156,15 @@ namespace Assets
             if (_signedIn)
             {
                 StatusText.GetComponent<Text>().text = "Hello " + _authClient.UserName;
-                mlxrSession.SessionUpdateToken(_authClient.AccessToken);
+                EnableSessionToggleButton(true);
+                StartSession();
             }
             else
             {
                 Debug.Log("SignInBehavior::Failed to perform refresh.");
                 StatusText.GetComponent<Text>().text =
                     "An error occurred during refresh.  Please ensure you have Internet access.";
+                EnableSessionToggleButton(false);
             }
             EnableSignInButton(true);
         }
@@ -113,7 +173,8 @@ namespace Assets
         {
             Debug.Log("SignInBehavior::Signing out...");
 
-            mlxrSession.StopSession();
+            StopSession();
+            EnableSessionToggleButton(false);
 
             _signedIn = !await _authClient.LogoutAsync();
 
@@ -147,8 +208,11 @@ namespace Assets
         void OnApplicationPause(bool pauseStatus)
         {
             Debug.Log("SignInBehavior::OnApplicationPause: " + pauseStatus);
-            var resumed = !pauseStatus;
-            if (resumed)
+            if (pauseStatus)
+            {
+                StopSession();
+            }
+            else
             {
                 Debug.Log("SignInBehavior::App was resumed.");
                 if (_authOperationInProgress)
@@ -163,6 +227,7 @@ namespace Assets
                 else
                 {
                     // App has been resumed, but we are not signing in, e.g. user has closed the sign-out browser.
+                    StartSession();
                     EnableSignInButton(true);
                 }
             }
@@ -170,13 +235,13 @@ namespace Assets
 
         async Task Update()
         {
-            //if (_watchForReply && DateTime.Now - _watchForReplyStartTime > TimeSpan.FromSeconds(MaxSecondsToWaitForAuthReply))
-            //{
-            //    Debug.Log("SignInBehavior::No auth reply received, assuming the user cancelled or was unable to complete the sign-in.");
-            //    _watchForReply = false;
-            //    _signinCancelled = true;
-            //    _authClient.Browser.OnAuthReply(null);
-            //}
+            if (_watchForReply && DateTime.Now - _watchForReplyStartTime > TimeSpan.FromSeconds(MaxSecondsToWaitForAuthReply))
+            {
+                Debug.Log("SignInBehavior::No auth reply received, assuming the user cancelled or was unable to complete the sign-in.");
+                _watchForReply = false;
+                _signinCancelled = true;
+                _authClient.Browser.OnAuthReply(null);
+            }
 
             if (_signedIn && DateTime.Now >= _authClient.AccessTokenExpiration.AddMinutes(expirationOffsetMinutes))
             {

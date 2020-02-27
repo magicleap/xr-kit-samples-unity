@@ -7,7 +7,7 @@
         <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.Awake">
             Public functions.
         </member>
-        <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.SetFixedCameraFocus(UnityEngine.XR.ARFoundation.ARCameraManager)">
+        <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.SetupCameraConfig">
             Private functions.
         </member>
     </members>
