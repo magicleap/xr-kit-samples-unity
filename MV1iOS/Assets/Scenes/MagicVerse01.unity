@@ -752,7 +752,7 @@ MonoBehaviour:
   MLXRSessionInstance: {fileID: 573043580}
   _pcfStatusText: {fileID: 633987596}
   displayDebugVisuals: 1
-  AnchorVisualPrefab: {fileID: 362932065689034767, guid: 19270db00845f45f79994d0e2915addd,
+  AnchorVisualPrefab: {fileID: 7109687723159788376, guid: 466604adb011a43a182566da17dc9d21,
     type: 3}
   AnchorVisualUpdateRate: 0.1
   cam: {fileID: 984154720}
