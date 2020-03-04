@@ -40,6 +40,10 @@ public class RuntimeManager : MonoBehaviour
                 controlInput.OnTriggerDown.AddListener(HandleTriggerDown);
         #endif
 
+        #if PLATFORM_IOS || PLATFORM_ANDROID
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        #endif
+
     }
 
     // Update is called once per frame
