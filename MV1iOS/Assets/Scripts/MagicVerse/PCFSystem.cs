@@ -147,7 +147,7 @@ public class PCFSystem : MonoBehaviour
     void Update()
     {
         // Currently Update is just used to display debug visuals. 
-        if (displayDebugVisuals)
+        if (!displayDebugVisuals)
             return;
 
 #if PLATFORM_IOS || PLATFORM_ANDROID

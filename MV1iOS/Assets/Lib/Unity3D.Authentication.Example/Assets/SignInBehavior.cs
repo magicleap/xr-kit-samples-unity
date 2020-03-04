@@ -87,6 +87,10 @@ namespace Assets
 
         private void StartSession()
         {
+            if (_authClient == null)
+            {
+                return;
+            }
             if (_authClient.AccessToken != null)
             {
                 mlxrSession.SessionUpdateToken(_authClient.AccessToken);
