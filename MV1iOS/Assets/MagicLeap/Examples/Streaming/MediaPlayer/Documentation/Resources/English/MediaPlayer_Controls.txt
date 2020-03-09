@@ -1,0 +1,30 @@
+<color=#dbfb76><b>Trigger</b></color>
+Activate interactable interface object pointed to by the controller's ray.
+
+<color=#dbfb76><b>Bumper</b></color>
+Cycle through example MLMediaPlayer content.
+
+The controller acts as a virtual pointer. A ray coming out of the controller model indicates where the controller is pointing at. If the controller is pointing at an interactable interface, the ray cursor is a yellow circle. Pull the trigger to activate the interface and change the cursor color green. The controller bumper button can be used to cycle through the different videos.
+
+<b>Timeline Slider</b>
+Pull the trigger while pointing on the Timeline control:
+- The playhead jumps to that location. The content might need to buffer for a short time before playback can continue.
+- You can scrub through the timeline by dragging the playhead.
+
+<b>Rewind 10 Seconds</b>
+Pull the trigger while pointing at the Rewind control:
+- The playhead moves backward by 10 seconds.
+
+<b>Play/Pause</b>
+Pull the trigger while pointing to the Play/Pause control:
+- If the video is paused, this resumes playback.
+- If the video is stopped, this resets the playhead back to the beginning and starts playing.
+- If the video is playing, this pauses the video playback.
+
+<b>Forward 10 Seconds</b>
+Pull the trigger while pointing to the Forward control:
+- The playhead moves forward by 10 seconds.
+
+<b>Volume Slider</b>
+Pull the trigger while pointing to the Volume control:
+- Modifies the volume.

@@ -1,0 +1,23 @@
+<color=#dbfb76><b>Calibration</b></color>
+- Press the MLA Home Button to enter calibration
+- Align your mobile device with the model on the scene
+- Press the MLA Home Button again to apply calibration and the model rotate as you rotate your mobile phone.
+
+<color=#dbfb76><b>MLA Bumper</b> - Bottom right button with 2 circles</color>
+- A ring around the bumper button on the mobile phone model lights up.
+
+<color=#dbfb76><b>MLA Home Button</b> - Bottom middle button with the house icon</color>
+- A ring around the home button on the mobile phone model lights up for a short duration.
+- Calibration steps will get applied.
+
+<color=#dbfb76><b>MLA Trigger</b> - Bottom left button with the 4 arrows</color>
+- A ring around the trigger button on the mobile phone model lights up.
+- Note: the trigger value can only be 0 or 1 for the MLA.
+
+<color=#dbfb76><b>MLA Touchpad</b> - Grid at the center of the app</color>
+- The touchpad on the mobile phone model shows the touch location, similar to what you see on the actual MLA. A maximum of two touches can be detected.
+
+<color=#dbfb76><b>MLA Keyboard</b> - Tap the keyboard icon on the upper right corner</color>
+- Printable characters appear on the keyboard input (left side). Note: you have to tap **Submit** on the MLA.
+- The delete key (backspace) removes the last printable character entered. This key does not require to tap Submit.
+

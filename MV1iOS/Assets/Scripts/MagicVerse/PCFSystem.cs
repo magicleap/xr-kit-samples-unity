@@ -20,6 +20,7 @@ using UnityEngine.UI;
 using MagicLeapTools;
 #if PLATFORM_LUMIN
 using UnityEngine.XR.MagicLeap;
+using UnityEngine.XR.MagicLeap.Native;
 #elif PLATFORM_IOS || PLATFORM_ANDROID
 using MagicLeap.XR.XRKit;
 #endif
@@ -106,29 +107,19 @@ public class PCFSystem : MonoBehaviour
         Debug.Log($"PoseForPCFID with PCFID: {pcfId}");
 
 #if PLATFORM_LUMIN
-        List<MLPCF> allPcfs = new List<MLPCF>();
-        if (MLPersistentCoordinateFrames.GetAllPCFs(out allPcfs).IsOk)
+        
+        if (MLPersistentCoordinateFrames.FindPCFByCFUID(PCFUIDFromString(pcfId), out MLPersistentCoordinateFrames.PCF pcf).IsOk)
         {
-            foreach (MLPCF mlPCF in allPcfs)
-            {
-                if (mlPCF.CFUID.ToString().Equals(pcfId))
-                {
-                    MLPersistentCoordinateFrames.GetPCFPose(mlPCF, (MLResult result, MLPCF posedPCF) =>
-                    {
-                        if (result.IsOk)
-                        {
-                            Pose pose  = returnPose(posedPCF.Position, posedPCF.Orientation);
-                            Debug.Log($"PoseForPCFID callback PCF: {mlPCF} Returning Pose: {pose}");
-                            poseHandler(true, pose);
-                        } else {
-                            Debug.Log("PoseForPCFID Error: No Matching Pcf found");
-                            poseHandler(false, returnPose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)));
-                        }
-                    });
-                }
-            }
+            Pose pose  = returnPose(pcf.Position, pcf.Rotation);
+            Debug.Log($"PoseForPCFID callback PCF: {pcf} Returning Pose: {pose}");
+            poseHandler(true, pose);
+        } else {
+            Debug.Log("PoseForPCFID Error: No Matching Pcf found");
+            poseHandler(false, returnPose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)));
         }
+                    
 #elif UNITY_IOS || UNITY_ANDROID
+
         if (PcfPoseLookup.ContainsKey(pcfId))
         {
             PcfPoseData poseData = PcfPoseLookup[pcfId];
@@ -141,7 +132,9 @@ public class PCFSystem : MonoBehaviour
             Debug.Log("PoseForPCFID Error: No Matching Pcf found");
             poseHandler(false, returnPose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)));
         }
+
 #endif
+
     }
 
     void Update()
@@ -271,7 +264,7 @@ public class PCFSystem : MonoBehaviour
         MLResult result = MLPersistentCoordinateFrames.Start();
         if (!result.IsOk)
         {
-            if (result.Code == MLResultCode.PrivilegeDenied)
+            if (result.Result == MLResult.Code.PrivilegeDenied)
             {
                 Instantiate(Resources.Load("PrivilegeDeniedError"));
             }
@@ -282,7 +275,7 @@ public class PCFSystem : MonoBehaviour
         }
 
         pcfsStarted = true;
-        if (MLPersistentCoordinateFrames.IsReady)
+        if (MLPersistentCoordinateFrames.IsLocalized)
         {
             // Success of PCF systems. Handle startup
             PerformStartup();
@@ -290,15 +283,15 @@ public class PCFSystem : MonoBehaviour
         else
         {
             // Wait for initialization callback to check for PCF status
-            MLPersistentCoordinateFrames.OnInitialized += HandleInitialized;
+            MLPersistentCoordinateFrames.OnLocalized += HandleInitialized;
         }
     }
 
-    void HandleInitialized(MLResult status)
+    void HandleInitialized(bool localized)
     {
-        MLPersistentCoordinateFrames.OnInitialized -= HandleInitialized;
+        MLPersistentCoordinateFrames.OnLocalized -= HandleInitialized;
 
-        if (status.IsOk)
+        if (localized)
         {
             if (_pcfStatusText != null) {
                 _pcfStatusText.text = "<color=green>World Map Loaded</color>";
@@ -312,9 +305,9 @@ public class PCFSystem : MonoBehaviour
             /// PersistenceSystems.
             /// 
             if (_pcfStatusText != null) {
-                _pcfStatusText.text = string.Format("<color=red>{0}</color>", status);
+                _pcfStatusText.text = string.Format("<color=red> Not yet Localized </color>");
             }
-            Debug.LogErrorFormat("Error: MLPersistentCoordinateFrames failed to initialize, trying again. Reason: {0}", status);
+            Debug.LogErrorFormat("Error: MLPersistentCoordinateFrames failed to localize, trying again.");
             MLPersistentCoordinateFrames.Stop();
             pcfsStarted = false;
 
@@ -349,5 +342,50 @@ public class PCFSystem : MonoBehaviour
             _pcfStatusText.text = string.Format("<color=red>Error: {0}</color>", result);
         }
     }
+
+    // -- Utility methods to convert between MLCoordinateFrameUID and a strings -- //
+
+     /// <summary>
+    /// Returns the GUID based on the values of this MLCoordinateFrameUID.
+    /// </summary>
+    /// <returns>The calculated GUID.</returns>
+    public static Guid PCFUIDToGuid(MagicLeapNativeBindings.MLCoordinateFrameUID frameUID)
+    {
+        byte[] high = BitConverter.GetBytes(frameUID.First);
+        byte[] low = BitConverter.GetBytes(frameUID.Second);
+        FlipGuidComponents(high);
+        ulong newFirst = BitConverter.ToUInt64(high, 0);
+        return new Guid((int)(newFirst >> 32 & 0x00000000FFFFFFFF), (short)(newFirst >> 16 & 0x000000000000FFFF), (short)(newFirst & 0x000000000000FFFF), low);
+    }
+    /// <summary>
+    /// Flips a component of the GUID based on <c>endianness</c>.
+    /// </summary>
+    /// <param name="bytes">The array of bytes to reverse.</param>
+    private static void FlipGuidComponents(byte[] bytes)
+    {
+        if (BitConverter.IsLittleEndian)
+        {
+            Array.Reverse(bytes);
+        }
+    }
+    public static MagicLeapNativeBindings.MLCoordinateFrameUID PCFUIDFromString(string s)
+    {
+        Guid guid = Guid.Parse(s);
+        string guidString = guid.ToString("N");
+        ulong flippedFirst = ulong.Parse(guidString.Substring(0, 16), System.Globalization.NumberStyles.HexNumber);
+        ulong flippedSecond = ulong.Parse(guidString.Substring(16, 16), System.Globalization.NumberStyles.HexNumber);
+        byte[] bytes = BitConverter.GetBytes(flippedFirst);
+        FlipGuidComponents(bytes);
+        ulong first = BitConverter.ToUInt64(bytes, 0);
+        bytes = BitConverter.GetBytes(flippedSecond);
+        FlipGuidComponents(bytes);
+        ulong second = BitConverter.ToUInt64(bytes, 0);
+        MagicLeapNativeBindings.MLCoordinateFrameUID cfuid =  new MagicLeapNativeBindings.MLCoordinateFrameUID();
+        cfuid.First = first;
+        cfuid.Second = second;
+        return cfuid;
+    }
+
 #endif
+
 }

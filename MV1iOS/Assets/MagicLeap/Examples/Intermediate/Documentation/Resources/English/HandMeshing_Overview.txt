@@ -1,0 +1,14 @@
+This example demonstrates and prescribes preferred methods for hand meshing.
+The example provides a HandMeshingExample script that drives parameters of the meshing API through the MLHandMeshingBehavior.
+
+Render Modes:
+  Occlusion - Using an unlit black material, anything behind the hand will be occluded.
+  Flat - The hand mesh will be rendered with an unlit white material.
+  Wireframe - The hand mesh will be rendered with a wireframe material.
+  Paused - The hand mesh will stop updating, freezing any mesh previously acquired.
+
+<color=#dbfb76><b>Privileges</b></color>
+- GesturesSubscribe
+- GesturesConfig
+- HandMesh
+- ControllerPose

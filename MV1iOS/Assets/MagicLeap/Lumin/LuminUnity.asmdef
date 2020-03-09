@@ -1,0 +1,19 @@
+{
+    "name": "LuminUnity",
+    "references": [
+        "GUID:28d8685fae23c21419ef42894cb9b075",
+        "GUID:ec0144320e2ab8c42b9ce084651ff2a1",
+        "GUID:f2d67d65fc4899a4089f85ebb7f8c2ff",
+        "GUID:b13a1d1dfb13f1b489a0ff5612f36f29",
+        "GUID:ba171b3dd2a51234ab864770f99741a5",
+        "GUID:e40ba710768534012815d3193fa296cb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

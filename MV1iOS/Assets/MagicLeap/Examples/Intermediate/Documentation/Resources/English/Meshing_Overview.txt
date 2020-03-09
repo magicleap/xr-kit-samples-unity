@@ -1,0 +1,14 @@
+This example demonstrates and prescribes preferred methods for using the meshing functionality.
+Provided is a MeshingExample script that drives parameters of the meshing API through the MLSpatialMapper.
+
+This example provides a use case of the MapEvents functionality, clearing all fragments and refreshing the mesh when a new map is detected.
+
+The scene provides several examples of changing the way rendering and physics interact with the meshing results. You can:
+- Visualize the mesh results.
+- Use the mesh results as occlusion data for virtual objects.
+- Toggle the bounds extents between bounded and unbounded (max bounds) and visualize the bounds with a wire frame cube.
+- Shoot prefab spheres into the scene for physics interaction.
+
+<color=#dbfb76><b>Privileges</b></color>
+- WorldReconstruction
+- ControllerPose

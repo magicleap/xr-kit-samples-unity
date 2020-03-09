@@ -1,0 +1,9 @@
+This example demonstrates the functionality of using the microphone for audio recording and playback through the device speakers. Once audio capture has started the parrot in the scene will repeat what the microphone detects. The spatial audio playback will come from the location of the parrot.
+
+- Realtime Playback, the audio will playback immediately and without any pitch modifications to the audio clip.
+
+- Delayed Playback, the audio will playback with a slightly higher pitch once it detects that you have finished speaking.
+
+<color=#dbfb76><b>Privileges</b></color>
+- AudioCaptureMic
+- ControllerPose

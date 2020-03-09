@@ -90,12 +90,9 @@ public class RuntimeManager : MonoBehaviour
             Vector3 objPos = controlInput.Position;
             objPos.z += 5;
 
-            // Sort the list of PCFs by distance to where the object will be spawned and retreive the first pcf in the list (since its the closest)
-            var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(objPos,
-            (MLResult result, MLPCF pcfToBindTo) =>
-            {
-                SpawnAndAttachToPCF(resourceToSpawn.name, objPos, pcfToBindTo.CFUID.ToString(), pcfToBindTo.Position, pcfToBindTo.Orientation);
-            });
+            MLPersistentCoordinateFrames.PCF pcfToBindTo;
+            var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(objPos, out pcfToBindTo, MLPersistentCoordinateFrames.PCF.Types.MultiUserMultiSession, true);
+            SpawnAndAttachToPCF(resourceToSpawn.name, objPos, pcfToBindTo.CFUID.ToString(), pcfToBindTo.Position, pcfToBindTo.Rotation);
     }
 
 #endif

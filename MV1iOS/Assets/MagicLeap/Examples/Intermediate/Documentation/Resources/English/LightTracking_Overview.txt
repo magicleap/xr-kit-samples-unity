@@ -1,0 +1,7 @@
+This example demonstrates and prescribes preferred methods for using light tracking and observing the luminance level within a scene.
+
+Located in the center is a luminance level indicator, and will update based on the light conditions in your environment.
+The light sensor is located on the left and right side of the headset.
+
+<color=#dbfb76><b>Privileges</b></color>
+- ControllerPose

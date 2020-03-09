@@ -1,0 +1,15 @@
+<color=#dbfb76><b>Hometap</b></color>
+Toggle the tablet following head pose.
+
+<color=#dbfb76><b>Tablet Touch Ring</b></color>
+Rotate through a list of 16 pre-defined colors.
+
+<color=#dbfb76><b>Tablet Touch Ring - Button</b></color>
+Clear the canvas.
+
+<color=#dbfb76><b>Drawing</b></color>
+Use the pen on the tablet surface to draw with the selected color.
+
+<color=#dbfb76><b>Erasing</b></color>
+- Default Pen:  Use the opposite end of the pen while drawing to erase content.
+- Both Pens:    Hold the [Back] button on the pen while drawing to erase content.

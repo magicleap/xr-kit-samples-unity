@@ -1,0 +1,5 @@
+<color=#dbfb76><b>Trigger Down</b></color>
+- Cycle Audio Modes
+
+<color=#dbfb76><b>Bumper</b></color>
+- Reset the location of the parrot.

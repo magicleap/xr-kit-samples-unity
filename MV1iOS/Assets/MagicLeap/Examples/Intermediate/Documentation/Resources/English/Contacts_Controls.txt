@@ -1,0 +1,16 @@
+<color=#dbfb76><b>Bumper</b></color>
+- Reset the contacts panel position.
+
+<color=#dbfb76><b>MLA Bumper Button</b></color>
+- Reset the contacts panel position.
+
+<color=#dbfb76><b>MLA Touchpad</b></color>
+- Move the cursor around.
+- If the cursor is on a button, tap to activate it.
+- If the cursor is on a text field, tap to erase the contents.
+
+<color=#dbfb76><b>MLA Keyboard</b></color>
+- If the cursor is on a text field, append the entered text unto the text field.
+
+<color=#dbfb76><b>MLA Home Button</b></color>
+- Calibrates the controller transform.
