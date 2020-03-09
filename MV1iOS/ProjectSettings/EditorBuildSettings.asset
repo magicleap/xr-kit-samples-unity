@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MagicVerse01.unity
+    path: Assets/Scenes/MagicVerse_mobile.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/MagicVerse_Lumin01.unity
+    guid: 2b1c55cb8c494410cb4bae6150383231
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 4a0d98ada496a4b3fa3a3ee66915667f,
       type: 2}
