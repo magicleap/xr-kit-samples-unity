@@ -87,8 +87,7 @@ public class RuntimeManager : MonoBehaviour
 #elif PLATFORM_LUMIN
     private void HandleTriggerDown()
     {
-            Vector3 objPos = controlInput.Position;
-            objPos.z += 5;
+            Vector3 objPos = controlInput.transform.position + controlInput.transform.forward * 5;
 
             MLPersistentCoordinateFrames.PCF pcfToBindTo;
             var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(objPos, out pcfToBindTo, MLPersistentCoordinateFrames.PCF.Types.MultiUserMultiSession, true);
