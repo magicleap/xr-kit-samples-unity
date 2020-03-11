@@ -27,7 +27,7 @@ public class PCFAnchorVisual : MonoBehaviour
             string anchorText = MakeAnchorString(value);
             tm.text = anchorText;
             this._anchor = value;
-            Debug.LogFormat("Added MLXRAnchor: {0}", anchorText);
+            Debug.LogFormat("Added MLXRAnchor Visual: {0}", anchorText);
         }
     }
         
@@ -41,5 +41,31 @@ public class PCFAnchorVisual : MonoBehaviour
             + $"valid radius: {anchor.confidence.valid_radius_m} meters";
     }
 
+#elif PLATFORM_LUMIN
+    private MLPersistentCoordinateFrames.PCF _pcf;
+    public MLPersistentCoordinateFrames.PCF PCF {
+        get { return this._pcf; }
+        set {
+            TextMesh tm = GetComponentInChildren<TextMesh>();
+            string pcfText = MakePCFString(value);
+            tm.text = pcfText;
+            this._pcf= value;
+            Debug.LogFormat("Added MLPersistentCoordinateFrames.PCF Visual: {0}", pcfText);
+        }
+    }
+
+    private static string MakePCFString(MLPersistentCoordinateFrames.PCF pcf)
+    {
+        return $"ID: {pcf.CFUID.ToString()}\n"
+            + $"position: {pcf.Position}\n"
+            + $"rotation: {pcf.Rotation}\n"
+            + $"confidence: {pcf.Confidence}\n"
+            + $"rotation error: {pcf.RotationErrDeg} degrees\n"
+            + $"translation error: {pcf.TranslationErrM} meters\n"
+            + $"valid radius: {pcf.ValidRadiusM} meters\n"
+            + $"type: {pcf.Type}";
+    }
+
 #endif
+
 }

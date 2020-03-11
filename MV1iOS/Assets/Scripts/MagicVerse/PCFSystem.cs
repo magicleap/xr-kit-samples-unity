@@ -70,8 +70,13 @@ public class PCFSystem : MonoBehaviour
 
     void Start()
     {
+        visualParent = new GameObject("Anchors");
+        visualParent.transform.parent = transform;
+
 #if PLATFORM_LUMIN
         StartPCFS();
+        MLPersistentCoordinateFrames.PCF.OnStatusChange += OnStatusChange;
+
 #elif PLATFORM_IOS || PLATFORM_ANDROID
         if (MLXRSessionInstance == null)
         {
@@ -80,10 +85,7 @@ public class PCFSystem : MonoBehaviour
         // Register for the Anchor callbacks
         MLXRSessionInstance.anchorsChanged += HandleAnchorsChanged;
 #endif
-
-        visualParent = new GameObject("Anchors");
-        visualParent.transform.parent = transform;
-
+        
     }
 
     void OnDestroy()
@@ -128,9 +130,7 @@ public class PCFSystem : MonoBehaviour
             Debug.Log("PoseForPCFID Error: No Matching Pcf found");
             poseHandler(false, returnPose(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0)));
         }
-
 #endif
-
     }
 
     void Update()
@@ -156,14 +156,14 @@ public class PCFSystem : MonoBehaviour
             }
 
             tm.transform.LookAt(tm.transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+
         }
 
         // All direct children of the child container will represent a single Anchor
         numAnchors = visualParent.transform.childCount;
 
-
+    #if PLATFORM_IOS || PLATFORM_ANDROID
         StringBuilder sb = new StringBuilder();
-#if PLATFORM_IOS || PLATFORM_ANDROID
         sb.AppendFormat("Localization Status: {0}\n", MLXRSessionInstance.GetLocalizationStatus());
 
         // Once we've localized one time, we want to start printing # of Anchors
@@ -174,13 +174,14 @@ public class PCFSystem : MonoBehaviour
                 LoggedLocalizedOnce = true;
             }
         }
-#endif
         if (LoggedLocalizedOnce)
         {
             sb.AppendFormat("Number of Anchors Found: {0}\n", numAnchors);
         }
 
         _pcfStatusText.text = sb.ToString();
+    #endif
+
     }
 
 
@@ -326,8 +327,42 @@ public class PCFSystem : MonoBehaviour
             OnPcfsReady(this);
         }
 
+        //trigger updates
+        if (displayDebugVisuals) {
+            MLPersistentCoordinateFrames.FindAllPCFs(out List<MLPersistentCoordinateFrames.PCF> list);
+        }
+
         if (_pcfStatusText != null) {
             _pcfStatusText.text = "Done Restoring Content";
+        }
+    }
+
+    private void OnStatusChange(MLPersistentCoordinateFrames.PCF.Status pcfStatus, MLPersistentCoordinateFrames.PCF pcf) {
+        if (displayDebugVisuals) {
+            if (pcfStatus == MLPersistentCoordinateFrames.PCF.Status.Created){
+                PCFAnchorVisual newVisual = Instantiate(AnchorVisualPrefab, pcf.Position, pcf.Rotation);
+                newVisual.transform.parent = visualParent.transform;
+                newVisual.GetComponent<PCFAnchorVisual>().PCF = pcf;
+            }
+
+            if (pcfStatus == MLPersistentCoordinateFrames.PCF.Status.Lost){
+                foreach (var visual in visualParent.GetComponentsInChildren<PCFAnchorVisual>()){
+                    if (visual.PCF.Equals(pcf)){
+                        DestroyImmediate(visual.gameObject);
+                    }
+                }
+            }
+
+            if (pcfStatus == MLPersistentCoordinateFrames.PCF.Status.Updated){
+                foreach (var visual in visualParent.GetComponentsInChildren<PCFAnchorVisual>()){
+                    if (visual.PCF.Equals(pcf)){
+                        visual.gameObject.transform.position = pcf.Position;
+                        visual.gameObject.transform.rotation = pcf.Rotation;
+                        Debug.LogFormat("PCF Updated anchor: was {0}, is now {1}", visual.PCF.ToString(), pcf.ToString());
+                        visual.PCF = pcf;
+                    } 
+                }
+            }
         }
     }
 

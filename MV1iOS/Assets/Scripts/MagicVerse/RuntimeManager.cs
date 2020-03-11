@@ -18,8 +18,6 @@ using MagicLeap.XR.XRKit;
 using UnityEngine.XR.MagicLeap;
 #endif
 
-// TODO: if PLATFORM_LUMIN Add basic cube placement using MLControl trigger
-
 public class RuntimeManager : MonoBehaviour
 {
     public Text info;
