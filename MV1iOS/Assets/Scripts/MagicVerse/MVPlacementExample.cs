@@ -22,12 +22,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using MagicLeapTools;
 using System.Linq;
+
 #if PLATFORM_IOS || PLATFORM_ANDROID
 using MagicLeap.XR.XRKit;
 #elif PLATFORM_LUMIN
 using UnityEngine.XR.MagicLeap;
 #endif
 
+// Example code that shows how to place a cube either on an iOS or Android device using XRAnchors, or on Lumin using PersistentCorrdinateFrames
+// Note: This code uses a modified version of MLTK Transmission to spawn gameobjects as children of anchors/pcfs (rather than the user's headpose)
 public class MVPlacementExample : MonoBehaviour
 {
     public Text info;
@@ -39,7 +42,6 @@ public class MVPlacementExample : MonoBehaviour
 
     #if PLATFORM_LUMIN
     [Tooltip("Needed only if Test Placement is checked to use control for testing object placement")]
-
     public ControlInput controlInput;
     #endif
 
@@ -103,8 +105,10 @@ public class MVPlacementExample : MonoBehaviour
 #elif PLATFORM_LUMIN
     private void HandleTriggerDown()
     {
+            // place a cube 5 units in front
             Vector3 objPos = controlInput.transform.position + controlInput.transform.forward * 5;
 
+            // Find the closest PCF and spawn the resource as an offset in local space 
             MLPersistentCoordinateFrames.PCF pcfToBindTo;
             var returnResult = MLPersistentCoordinateFrames.FindClosestPCF(objPos, out pcfToBindTo, MLPersistentCoordinateFrames.PCF.Types.MultiUserMultiSession, true);
             SpawnAndAttachToPCF(resourceToSpawn.name, objPos, pcfToBindTo.CFUID.ToString(), pcfToBindTo.Position, pcfToBindTo.Rotation);
@@ -114,17 +118,21 @@ public class MVPlacementExample : MonoBehaviour
 
     void SpawnAndAttachToPCF(string resourceName, Vector3 objPosition, string pcfid, Vector3 pcfPosition, Quaternion pcfRotation)
     {
-        // bind the object to the PCF
+        // Create a helper game object for the PCF and hide it in the hierarchy
         var transformHelper = new GameObject("(TransformHelper)").transform;
         transformHelper.gameObject.hideFlags = HideFlags.HideInHierarchy;
         transformHelper.SetPositionAndRotation(pcfPosition, pcfRotation);
         
+        // get the local coordinate system offset to the PCF for the game object we are about to create
         Vector3 positionOffset = transformHelper.InverseTransformPoint(objPosition);
         Quaternion rotationOffset = Quaternion.Inverse(transformHelper.rotation) * Quaternion.LookRotation(Vector3.forward);
 
-        // spawn everywhere and on the network using the local position and rotation (pcf offset) 
+        // Tell Transmission to spawn the game object everywhere on all peers on the network.
+        // Note, this is a modified version of MLTK Transmission which specifies a PCF (as the last parameter) 
+        // if a PCF string is specified, the passed in position and rotation will be in local space to the PCF (or XRAnchor) specified by the pcfid 
         TransmissionObject characterTransmissionObject = Transmission.Spawn(resourceName, positionOffset, rotationOffset, Vector3.one, pcfid);
         
+        // save our copy in case we need to update it later
         attachedGameObjects.Add(characterTransmissionObject.gameObject);
     }
 }

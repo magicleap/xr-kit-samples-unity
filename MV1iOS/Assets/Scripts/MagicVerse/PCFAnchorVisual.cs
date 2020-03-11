@@ -25,6 +25,7 @@ using UnityEngine.XR.MagicLeap;
 using MagicLeap.XR.XRKit;
 #endif
 
+// A debug PCF/XRAnchor visualizer. Attach this to a game object prefab
 public class PCFAnchorVisual : MonoBehaviour
 {
 #if PLATFORM_IOS || PLATFORM_ANDROID

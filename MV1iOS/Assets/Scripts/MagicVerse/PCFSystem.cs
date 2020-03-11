@@ -31,6 +31,11 @@ using UnityEngine.XR.MagicLeap.Native;
 using MagicLeap.XR.XRKit;
 #endif
 
+// PCFSystem does all the work of subscribing to XRAnchors (iOS/Android) and PCFs (Lumin)
+
+// NOTE: This code requires the modified version of Transmission in this project. 
+// This can be easily modified by removing the delegate setter. Then it can be used with any other networking API.
+
 public class PCFSystem : MonoBehaviour
 {
 #if PLATFORM_IOS || PLATFORM_ANDROID
@@ -75,16 +80,21 @@ public class PCFSystem : MonoBehaviour
             _pcfStatusText.text = "Status: Requesting Privileges";
         }
 
+        // NOTE: this uses a modified version of MLTK Transmission. 
+        // PCFSystem sets itself as the delegate for Transmission to query for a PCFID given a string
         Transmission.Instance.SetPCFPoseDelegate(PoseForPCFID);
     }
 
     void Start()
     {
+        // parent game object for all PCF visuals
         visualParent = new GameObject("Anchors");
         visualParent.transform.parent = transform;
 
 #if PLATFORM_LUMIN
         StartPCFS();
+
+        // setup handlers for pcf status updates
         MLPersistentCoordinateFrames.PCF.OnStatusChange += OnStatusChange;
 
 #elif PLATFORM_IOS || PLATFORM_ANDROID
@@ -108,6 +118,7 @@ public class PCFSystem : MonoBehaviour
 #endif
     }
 
+    // A unified method for anyone to get a Pose given a pcfid string. 
     Func<Vector3, Quaternion, Pose> returnPose = (p,r) => { return new Pose(p, r); };
     public void PoseForPCFID(string pcfId, Action<bool, Pose> poseHandler)
     {                            
@@ -384,7 +395,7 @@ public class PCFSystem : MonoBehaviour
         }
     }
 
-    // -- Utility methods to convert between MLCoordinateFrameUID and a strings -- //
+    // -- Utility methods to convert between MLCoordinateFrameUID and a strings. Will be replaced in future SDK updates with API -- //
 
      /// <summary>
     /// Returns the GUID based on the values of this MLCoordinateFrameUID.
