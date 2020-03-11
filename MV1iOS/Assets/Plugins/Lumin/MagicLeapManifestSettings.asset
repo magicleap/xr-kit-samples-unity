@@ -57,9 +57,9 @@ MonoBehaviour:
   - name: AddressBookWrite
     enabled: 0
   - name: CoarseLocation
-    enabled: 0
+    enabled: 1
   - name: LocalAreaNetwork
-    enabled: 0
+    enabled: 1
   - name: AudioCaptureMic
     enabled: 0
   - name: AudioRecognizer
@@ -67,9 +67,9 @@ MonoBehaviour:
   - name: CameraCapture
     enabled: 0
   - name: ComputerVision
-    enabled: 0
+    enabled: 1
   - name: FineLocation
-    enabled: 0
+    enabled: 1
   - name: Occlusion
     enabled: 0
   - name: PcfRead
@@ -89,4 +89,18 @@ MonoBehaviour:
   - name: WorldReconstruction
     enabled: 0
   - name: VoiceInput
+    enabled: 0
+  - name: ConnectionAccess
+    enabled: 0
+  - name: DesktopCompanion
+    enabled: 0
+  - name: SocialConnectionsSelectAccess
+    enabled: 0
+  - name: Expressions
+    enabled: 0
+  - name: ObjectData
+    enabled: 0
+  - name: ConnectionAudioCaptureStreaming
+    enabled: 0
+  - name: ConnectionVideoCaptureStreaming
     enabled: 0

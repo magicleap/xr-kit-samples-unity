@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eac1499388544530b53a37d9e730d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pcfStatusText: {fileID: 0}
+  _pcfStatusText: {fileID: 102771715}
   displayDebugVisuals: 0
   AnchorVisualPrefab: {fileID: 7109687723159788376, guid: 466604adb011a43a182566da17dc9d21,
     type: 3}
