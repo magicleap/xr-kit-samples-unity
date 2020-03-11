@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// ---------------------------------------------------------------------
+//
+// Copyright (c) 2019 Magic Leap, Inc. All Rights Reserved.
+// Use of this file is governed by the Creator Agreement, located
+// here: https://id.magicleap.com/creator-terms
+//
+// ---------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
