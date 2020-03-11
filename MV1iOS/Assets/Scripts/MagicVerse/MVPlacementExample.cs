@@ -28,7 +28,7 @@ using MagicLeap.XR.XRKit;
 using UnityEngine.XR.MagicLeap;
 #endif
 
-public class RuntimeManager : MonoBehaviour
+public class MVPlacementExample : MonoBehaviour
 {
     public Text info;
     private string _initialInfo;
