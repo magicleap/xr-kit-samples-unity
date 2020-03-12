@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18029505, g: 0.22572652, b: 0.30692935, a: 1}
+  m_IndirectSpecularColor: {r: 0.1802837, g: 0.22571404, b: 0.30692273, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -750,6 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eac1499388544530b53a37d9e730d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MLXRSessionInstance: {fileID: 573043580}
   _pcfStatusText: {fileID: 633987596}
   displayDebugVisuals: 1
   AnchorVisualPrefab: {fileID: 7109687723159788376, guid: 466604adb011a43a182566da17dc9d21,
@@ -1379,7 +1380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 1096844205}
   testPlacement: 1
-  controlInput: {fileID: 0}
   resourceToSpawn: {fileID: 5327960270370931286, guid: b97e9918ec51b47bfbccf4b990c28fa5,
     type: 3}
 --- !u!4 &1714937394
