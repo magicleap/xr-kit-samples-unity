@@ -350,7 +350,7 @@ public class PCFSystem : MonoBehaviour
 
         //trigger updates
         if (displayDebugVisuals) {
-            MLPersistentCoordinateFrames.FindAllPCFs(out List<MLPersistentCoordinateFrames.PCF> list);
+            MLPersistentCoordinateFrames.FindAllPCFs(out List<MLPersistentCoordinateFrames.PCF> list, int.MaxValue, MLPersistentCoordinateFrames.PCF.Types.MultiUserMultiSession);
         }
 
         if (_pcfStatusText != null) {
