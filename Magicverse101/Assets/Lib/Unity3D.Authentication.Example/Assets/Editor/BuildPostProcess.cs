@@ -11,7 +11,7 @@ public class BuildPostProcess {
     public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
     {
 #if UNITY_IOS
-        string uriScheme = "mlxr-app";
+        string uriScheme = "";
 
         var infoPlist = new UnityEditor.iOS.Xcode.PlistDocument();
         var infoPlistPath = pathToBuiltProject + "/Info.plist";

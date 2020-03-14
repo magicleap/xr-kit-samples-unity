@@ -13,8 +13,8 @@ void UnitySendMessage( const char * className, const char * methodName, const ch
     if (!url)
         return NO;
 
-    NSString* uriScheme = @"mlxr-app";
-    NSString* uriHost = @"auth-callback";
+    NSString* uriScheme = @"";
+    NSString* uriHost = @"";
     
     if ([url.scheme isEqualToString:uriScheme]) {
         if ([url.host isEqualToString:uriHost]) {

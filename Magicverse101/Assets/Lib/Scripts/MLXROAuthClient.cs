@@ -20,9 +20,9 @@ public class MLXROAuthClient : Assets.UnityAuthClient
 {
     public override OidcClient CreateAuthClient()
     {
-        string uriScheme = "mlxr-app";
-        string uriHost = "auth-callback";
-        string clientId = "com.magicleap.mobile.mlxrsdkqatest";
+        string uriScheme = "";
+        string uriHost = "";
+        string clientId = "";
 
         var options = new OidcClientOptions()
         {

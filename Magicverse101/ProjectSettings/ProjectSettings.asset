@@ -855,7 +855,7 @@ PlayerSettings:
     m_ModelFolderPath: 
     m_PortalFolderPath: 
   luminCert:
-    m_CertPath: /Users/filiescu/keys/filipiliescudev.cert
+    m_CertPath: 
     m_SignPackage: 1
   luminIsChannelApp: 0
   luminVersion:
