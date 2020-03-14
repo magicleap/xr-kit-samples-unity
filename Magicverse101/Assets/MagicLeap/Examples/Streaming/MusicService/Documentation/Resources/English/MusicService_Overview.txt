@@ -1,0 +1,18 @@
+This example demonstrates and prescribes preferred methods for using the Music Service API.
+
+The example makes use of prebuilt Background Music Service (BMS) Provider that serves as the media content provider to be used by the Music Service.
+
+With the use of the UI, this example provides the option to interact with tracks as well as change settings for the player. You can:
+ - Play/Pause/Stop the current track.
+ - Skip to the previous/next track.
+ - Toggle shuffling on and off.
+ - Toggle between Song/Album/Off repetition.
+ - Seek to different positions in the current track.
+ - Change the player volume.
+ - See current, previous and next track metadata.
+
+<color=#dbfb76><b>Privileges</b></color>
+- MusicService
+- ConnectBackgroundMusicService
+- RegisterBackgroundMusicService
+- ControllerPose

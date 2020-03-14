@@ -1,0 +1,16 @@
+<color=#dbfb76><b>Hover</b></color>
+- Hovering over a ball will highlight it.
+- Hovering over a ball when the Visualizer is active will also show a line from the ball to the PCF it is bound to.
+
+<color=#dbfb76><b>Hometap</b></color>
+- Toggles the PCF Visualizer.
+
+<color=#dbfb76><b>Bumper</b></color>
+- If localized, creates a persistent ball that automatically binds to a pcf and saves to the persistent store.
+
+<color=#dbfb76><b>Touchpad</b></color>
+- Destroys a ball and it's PCF binding.
+- Performing a radial scroll will remove all content and delete the local JSON file.
+
+<color=#dbfb76><b>Trigger</b></color>
+- Holding the trigger over a ball allows you to move the control to change it's position.

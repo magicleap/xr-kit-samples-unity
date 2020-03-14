@@ -1,0 +1,2 @@
+<color=#dbfb76><b>Bumper</b></color>
+Resets the location of the light intensity meter directly in front view of user.

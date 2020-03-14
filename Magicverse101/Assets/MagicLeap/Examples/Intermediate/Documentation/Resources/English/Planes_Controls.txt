@@ -1,0 +1,5 @@
+<color=#dbfb76><b>Bumper</b></color>
+Toggles the texturing mode for planes.
+
+<color=#dbfb76><b>Home Button</b></color>
+Switch plane query extents between bounded and unbounded.

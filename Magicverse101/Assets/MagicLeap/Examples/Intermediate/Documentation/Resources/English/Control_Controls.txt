@@ -1,0 +1,27 @@
+<color=#dbfb76><b>Bumper</b></color>
+When you press the Bumper:
+- The bumper in the controller model will change colors.
+- A haptic ForceDown body vibration effect occurs onButtonDown.
+- A haptic ForceUp body vibration effect occurs onButtonUp.
+- If CFUID (Coordinate Frame Unique ID) based tracking is enabled (which is on by default
+  in the examples on device), it would toggle whether to use it or or not. When CFUID tracking is disabled
+  it has no effect.
+
+<color=#dbfb76><b>Home Button</b></color>
+When you release the Home Button:
+- The home button in the controller model will light up for a small duration.
+
+<color=#dbfb76><b>Trigger</b></color>
+When you squeeze the Trigger:
+- The trigger in the controller model moves to match the physical controller
+  and the color will change based on the trigger value.
+- A haptic Buzz body vibration effect occurs on the controller. The intensity is based on
+  Trigger pressure.
+
+<color=#dbfb76><b>Touchpad</b></color>
+When you touch the Touchpad:
+- The touchpad in the controller model will change colors based on the pressure value.
+- A small visualizer will appear in the controller model at the position touched on the touchpad.
+- A LED pattern will occur in the controller where the closest LED to your touchpad
+  position and the oposite LED will light up.
+- The touchpad gesture is shown on the UI.

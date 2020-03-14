@@ -1,0 +1,9 @@
+<color=#dbfb76><b>Bumper</b></color>
+Cycles between the following world scale values:
+ - 1 (Meters)
+ - 10 (Decimeters)
+ - 100 (Centimeters)
+ - 37 (Custom Units)
+
+<color=#dbfb76><b>Touchpad</b></color>
+- Swipe Up/Down. Measure marker moves further/closer in the measurement ruler.

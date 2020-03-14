@@ -1,0 +1,6 @@
+This example demonstrates the Virtual Keyboard
+
+Using the controller hover over the input field and press the trigger button to open the virtual keyboard. You can enter text by hovering over a key and pressing the trigger on the controller. Once you're finished choose the submit or cancel button to close the keyboard.
+
+<color=#dbfb76><b>Privileges</b></color>
+- ControllerPose

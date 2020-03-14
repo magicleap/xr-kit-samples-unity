@@ -1,0 +1,7 @@
+<color=#dbfb76><b>Trigger</b></color>
+Toggle between video recording and raw video capture mode.
+
+<color=#dbfb76><b>Bumper</b></color>
+- First Press: Start video recording or raw video capture.
+- Second Press: Stop video recording and show preview or stop raw video capture.
+- Repeat
