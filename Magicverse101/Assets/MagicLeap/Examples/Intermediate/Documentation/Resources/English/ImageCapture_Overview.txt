@@ -1,0 +1,7 @@
+This example demonstrates and prescribes preferred methods for using the camera image capture feature and rendering the captured image.
+
+Located in the center is the most recent camera captured image, and will update when controller bumper is pressed.
+
+<color=#dbfb76><b>Privileges</b></color>
+- CameraCapture
+- ControllerPose

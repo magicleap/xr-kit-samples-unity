@@ -1,0 +1,12 @@
+The example demonstrates  how to visualize information from the Wacom Intuos tablet using the MLInput Tablet API.
+
+Once connected, the tablet will display which buttons are being pressed and the pen will respond by indicating position and pressure on the tablet. 
+
+As you begin to draw the line thickness will change based on applied pressure and the color will reflect the selection from the color wheel.
+
+With the tablet turned on, hold the center ring button until a blue light flashes on the right, to the right of the Wacom logo.
+
+<i>Visible in Settings/Connectivity/Bluetooth.</i>
+
+<color=#dbfb76><b>Privileges</b></color>
+- ControllerPose

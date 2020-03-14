@@ -1,0 +1,15 @@
+<color=#dbfb76><b>Bumper</b></color>
+Resets the music player UI position in front of the camera.
+
+<color=#dbfb76><b>Trigger</b></color>
+- Timeline Slider. The playhead jumps to that location. The content might need to buffer for a short time before playback can continue.
+
+- Volume Slider. Modifies the volume.
+
+- Prev/Next Buttons. Jump to the previous or next track in the playlist.
+
+- Play/Pause Buttons. Plays or pauses the current track. If the media is stopped, the track will start playing from the beginning.
+
+- Suffle Button: Toggles shuffle mode between on and off.
+
+- Repeat Button: Toggles repeat mode between Song, Album and Off.

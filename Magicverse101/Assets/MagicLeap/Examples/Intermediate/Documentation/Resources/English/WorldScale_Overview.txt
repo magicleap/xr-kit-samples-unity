@@ -1,0 +1,6 @@
+This example provides a worldscale unit of measure conversion.
+
+In the scene, the user can adjust a physical marker along a ruler to gauge the real world distance of the marker.
+
+<color=#dbfb76><b>Privileges</b></color>
+- ControllerPose

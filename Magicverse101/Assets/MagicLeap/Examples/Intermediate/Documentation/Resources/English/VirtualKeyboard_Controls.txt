@@ -1,0 +1,6 @@
+<color=#dbfb76><b>Trigger</b></color>
+- A haptic effect occurs on the controller when virtual keyboard buttons are hovered.
+- The trigger is used to select buttons on the virtual keyboard.
+
+<color=#dbfb76><b>Bumper</b></color>
+- Update the placement of the Keyboard Example UI.

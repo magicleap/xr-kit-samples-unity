@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MLXR-ios</name>
+    </assembly>
+    <members>
+        <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.Awake">
+            Public functions.
+        </member>
+        <member name="M:MagicLeap.XR.XRKit.MLXRSession_Impl.SetupCameraConfig">
+            Private functions.
+        </member>
+    </members>
+</doc>

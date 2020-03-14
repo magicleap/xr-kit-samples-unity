@@ -1,0 +1,12 @@
+This example demonstrates and prescribes preferred methods for receiving input from a Magic Leap Mobile App (MLA).
+
+When an MLA is connected, this example shows the MLA connection status in the UI.
+A mobile phone model shows the state of the buttons and touch input.
+
+This model follows your mobile device with 3 DoF rotational data after calibration is completed.
+Positional data is not available for MLA. When an MLA is disconnected, the example also updates the MLA connection status in the UI.
+
+Controllers get ignored in this example and MLA connection status in the UI will show as disconnected if only a controller is connected.
+
+<color=#dbfb76><b>Privileges</b></color>
+- ControllerPose

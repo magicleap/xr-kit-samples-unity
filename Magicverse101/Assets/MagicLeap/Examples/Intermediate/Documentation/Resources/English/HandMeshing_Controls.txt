@@ -1,0 +1,5 @@
+The example uses Hand Gestures to control the rendering mode.
+
+- Hold the <b>Ok</b> Hand Key Pose with your right hand for 2 seconds to switch between render modes.
+- Cover the virtual objects with your hands.
+
