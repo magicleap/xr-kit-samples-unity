@@ -1,4 +1,4 @@
-#Magicverse 101
+# Magicverse 101
 
 Copyright 2019-2020 Magic Leap, Inc. All rights reserved.
 
@@ -11,11 +11,11 @@ Created on and tested with :
 * **iOS Version 13.3.1**
 * **Android 10**
 
-##Overview
+## Overview
 
 This example shows how to create a Magicverse enabled Unity project that anchors content to MagicLeap created PCFs and transmits that content across a peer to peer local area network. This enables other devices running either an [**XR Kit**](https://developer.magicleap.com/downloads/magicverse) enabled version of the app on iOS or Android, or other MagicLeap devices with the same app to see the same content. The inverse is also shown, where an **XR Kit** enabled iOS or Android app can place a cube attached to an Anchor and it will appear on peer MagicLeap, iOS, and Android devices as well. 
 
-##Implementation notes
+## Implementation notes
 **Note:** This code uses a modified version of the [**MLTK**](https://developer.magicleap.com/learn/guides/magic-leap-toolkit-overview) Transmission API. A new overloaded version of Transmission.Spawn API has been added which takes a PCFID/XRAnchor string as a parameter. If this parameter exists, the passed position and rotation will be used as a local offset to the given PCF (rather than to the current user’s headpose). It is used to spawn a resource from the resource folder on all peers and set the newly spawned object as a child of a PCF.
 
 The Unity project contains a cross platform codebase and can be compiled and ran on Lumin, iOS, and Android. 
@@ -30,6 +30,6 @@ PCFAnchorVisual maintains the text strings seen in space. These will only be vis
 
 There are two scenes, one for Lumin and another for iOS and Android. Select the correct scene for the correct build target, set up OAuth credentials and away you go! **Experience the Magicverse…**
 
-##License
+## License
 
 See details in [license.md](license.md)
