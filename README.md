@@ -13,14 +13,14 @@ Created on and tested with :
 
 ## Overview
 
-This example shows how to create a Magicverse enabled Unity project that anchors content to MagicLeap created PCFs and transmits that content across a peer to peer local area network. This enables other devices running either an [**XR Kit**](https://developer.magicleap.com/downloads/magicverse) enabled version of the app on iOS or Android, or other MagicLeap devices with the same app to see the same content. The inverse is also shown, where an **XR Kit** enabled iOS or Android app can place a cube attached to an Anchor and it will appear on peer MagicLeap, iOS, and Android devices as well. 
+This example shows how to create a Magicverse enabled Unity project that anchors content to Magic Leap created PCFs and transmits that content across a peer to peer local area network. This enables other devices running either an [**XR Kit**](https://developer.magicleap.com/downloads/magicversesdk) enabled version of the app on iOS or Android, or other Magic Leap devices with the same app to see the same content. The inverse is also shown, where an **XR Kit** enabled iOS or Android app can place a cube attached to an Anchor and it will appear on peer Magic Leap, iOS, and Android devices as well. 
 
 ## Implementation notes
 **Note:** This code uses a modified version of the [**MLTK**](https://developer.magicleap.com/learn/guides/magic-leap-toolkit-overview) Transmission API. A new overloaded version of Transmission.Spawn API has been added which takes a PCFID/XRAnchor string as a parameter. If this parameter exists, the passed position and rotation will be used as a local offset to the given PCF (rather than to the current user’s headpose). It is used to spawn a resource from the resource folder on all peers and set the newly spawned object as a child of a PCF.
 
 The Unity project contains a cross platform codebase and can be compiled and ran on Lumin, iOS, and Android. 
 
-**Note:** For iOS and Android, this sample project uses the [**XR Kit SDK**](https://developer.magicleap.com/downloads/magicverse), and will require the developer to obtain OAuth credentials and populate them in the project as described in the documentation there.
+**Note:** For iOS and Android, this sample project uses the [**XR Kit SDK**](https://developer.magicleap.com/downloads/magicversesdk), and will require the developer to obtain OAuth credentials and populate them in the project as described in the documentation there.
 
 The code includes an example main MVPlacementExample which manages the Input and calls our modified **Transmission.Spawn** to spawn an Anchor/PCF attached game object across all peers on the network. 
 
