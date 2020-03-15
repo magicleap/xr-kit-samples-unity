@@ -1,8 +1,12 @@
 ------------------------------------------------------------------------
 MIT License
 applies to:
+  OpenCV 3.4.7
   Unity3D.Authentication.Example, Copyright (c) 2018 peterhorsley
   unity-ios-keychain-plugin, Copyright (c) 2017 Pham Tan Long
+  AspNetCore.Docs-master - upstream dependency of Unity3D.Authentication.Example
+  azure-activedirectory-identitymodel-extensions-for-dotnet-dev - upstream dependency of Unity3D.Authentication.Example
+  Newtonsoft.Json-master - upstream dependency of Unity3D.Authentication.Example
 ------------------------------------------------------------------------
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +33,10 @@ Apache License 2.0
     Ping Identity, equinux AG, Craig Lane <lane.craig.m@gmail.com>,
     Hernan Zalazar <hernan.zalazar@gmail.com>, Julien Bodet
     <julien.bodet92@gmail.com>
+- tensorflow 1.13.0
+- flatbuffers 1.11.0
+- IdentityModel-master - upstream dependency of Unity3D.Authentication.Example
+- IdentityModel.OidcClient-master - upstream dependency of Unity3D.Authentication.Example
 ------------------------------------------------------------------------
 Apache License
 Version 2.0, January 2004
@@ -199,7 +207,9 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-Collapse
+------------------------------------------------------------------------
 
+OTHER LICENSED THIRD PARTY MATERIALS
+incbin c9f3f009194
 
-
+------------------------------------------------------------------------
