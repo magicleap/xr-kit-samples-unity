@@ -15,6 +15,14 @@ Created on and tested with :
 
 This example shows how to create a Magicverse enabled Unity project that anchors content to Magic Leap created PCFs and transmits that content across a peer to peer local area network. This enables other devices running either an [**XR Kit**](https://developer.magicleap.com/downloads/magicversesdk) enabled version of the app on iOS or Android, or other Magic Leap devices with the same app to see the same content. The opposite is also shown, where an **XR Kit** enabled iOS or Android app can place a cube attached to an Anchor and it will appear on peer Magic Leap, iOS, and Android devices as well. 
 
+## Getting started
+
+This project contains one file that is stored in [LFS](https://git-lfs.github.com/) since it is too large: https://github.com/magicleap/xr-kit-samples-unity/blob/master/Magicverse101/Packages/MagicLeapXRKit/Runtime/Native/iOS/libmlxr_runtime_s.a
+
+So to get started on this project, `git clone` the repo to a folder in your hard drive, then `cd` into that folder and run the `git lfs pull` command to pull down the full file.
+
+Caveat: if you use the "Download Zip" button above, the zip will only contain the lfs link and not the full file.
+
 ## Implementation notes
 **Note:** This code uses a modified version of the [**MLTK**](https://developer.magicleap.com/learn/guides/magic-leap-toolkit-overview) Transmission API. A new overloaded version of Transmission.Spawn API has been added which takes a PCFID/XRAnchor string as a parameter. If this parameter exists, the passed position and rotation will be used as a local offset to the given PCF (rather than to the current user’s headpose). It is used to spawn a resource from the resource folder on all peers and set the newly spawned object as a child of a PCF.
 
